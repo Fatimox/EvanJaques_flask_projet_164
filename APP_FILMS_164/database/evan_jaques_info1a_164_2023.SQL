@@ -17,91 +17,97 @@ CREATE DATABASE IF NOT EXISTS evan_jaques_info1a_164_2023;
 USE evan_jaques_info1a_164_2023;
 -- --------------------------------------------------------
 -- --------------------------------------------------------
--- Hôte :                        127.0.0.1
--- Version du serveur:           5.1.72-community - MySQL Community Server (GPL)
--- SE du serveur:                Win32
--- HeidiSQL Version:             10.2.0.5599
+-- Hôte:                         127.0.0.1
+-- Version du serveur:           8.0.30 - MySQL Community Server - GPL
+-- SE du serveur:                Win64
+-- HeidiSQL Version:             12.1.0.6537
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
 -- Listage de la structure de la base pour evan_jaques_info1a_164_2023
-CREATE DATABASE IF NOT EXISTS `evan_jaques_info1a_164_2023` /*!40100 DEFAULT CHARACTER SET latin1 */;
+CREATE DATABASE IF NOT EXISTS `evan_jaques_info1a_164_2023` /*!40100 DEFAULT CHARACTER SET latin1 */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `evan_jaques_info1a_164_2023`;
 
--- Listage de la structure de la table evan_jaques_info1a_164_2023. enfants
-CREATE TABLE IF NOT EXISTS `enfants` (
-  `ENo` int(11) NOT NULL AUTO_INCREMENT,
+-- Listage de la structure de table evan_jaques_info1a_164_2023. t_enfants
+CREATE TABLE IF NOT EXISTS `t_enfants` (
+  `id_enfants` int NOT NULL AUTO_INCREMENT,
   `ENom` varchar(50) DEFAULT NULL,
   `EPrenom` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`ENo`)
+  PRIMARY KEY (`id_enfants`) USING BTREE
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Listage des données de la table evan_jaques_info1a_164_2023.enfants : 1 rows
-/*!40000 ALTER TABLE `enfants` DISABLE KEYS */;
-INSERT INTO `enfants` (`ENo`, `ENom`, `EPrenom`) VALUES
+-- Listage des données de la table evan_jaques_info1a_164_2023.t_enfants : 1 rows
+/*!40000 ALTER TABLE `t_enfants` DISABLE KEYS */;
+INSERT INTO `t_enfants` (`id_enfants`, `ENom`, `EPrenom`) VALUES
 	(1, 'Frederic', 'Lebois');
-/*!40000 ALTER TABLE `enfants` ENABLE KEYS */;
+/*!40000 ALTER TABLE `t_enfants` ENABLE KEYS */;
 
--- Listage de la structure de la table evan_jaques_info1a_164_2023. factures
-CREATE TABLE IF NOT EXISTS `factures` (
-  `FNo` int(11) NOT NULL AUTO_INCREMENT,
+-- Listage de la structure de table evan_jaques_info1a_164_2023. t_factures
+CREATE TABLE IF NOT EXISTS `t_factures` (
+  `id_factures` int NOT NULL AUTO_INCREMENT,
   `FDate` date DEFAULT NULL,
-  `FMontant` smallint(6) DEFAULT '0',
-  PRIMARY KEY (`FNo`)
+  `FMontant` smallint DEFAULT '0',
+  PRIMARY KEY (`id_factures`) USING BTREE
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Listage des données de la table evan_jaques_info1a_164_2023.factures : 1 rows
-/*!40000 ALTER TABLE `factures` DISABLE KEYS */;
-INSERT INTO `factures` (`FNo`, `FDate`, `FMontant`) VALUES
+-- Listage des données de la table evan_jaques_info1a_164_2023.t_factures : 1 rows
+/*!40000 ALTER TABLE `t_factures` DISABLE KEYS */;
+INSERT INTO `t_factures` (`id_factures`, `FDate`, `FMontant`) VALUES
 	(1, '2023-03-15', 120);
-/*!40000 ALTER TABLE `factures` ENABLE KEYS */;
+/*!40000 ALTER TABLE `t_factures` ENABLE KEYS */;
 
--- Listage de la structure de la table evan_jaques_info1a_164_2023. mail
-CREATE TABLE IF NOT EXISTS `mail` (
-  `MNo` int(11) NOT NULL AUTO_INCREMENT,
+-- Listage de la structure de table evan_jaques_info1a_164_2023. t_mail
+CREATE TABLE IF NOT EXISTS `t_mail` (
+  `id_mail` int NOT NULL AUTO_INCREMENT,
   `MNomMail` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`MNo`)
+  PRIMARY KEY (`id_mail`) USING BTREE
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Listage des données de la table evan_jaques_info1a_164_2023.mail : 1 rows
-/*!40000 ALTER TABLE `mail` DISABLE KEYS */;
-INSERT INTO `mail` (`MNo`, `MNomMail`) VALUES
+-- Listage des données de la table evan_jaques_info1a_164_2023.t_mail : 1 rows
+/*!40000 ALTER TABLE `t_mail` DISABLE KEYS */;
+INSERT INTO `t_mail` (`id_mail`, `MNomMail`) VALUES
 	(1, 'claudine.lebois@gmail.com');
-/*!40000 ALTER TABLE `mail` ENABLE KEYS */;
+/*!40000 ALTER TABLE `t_mail` ENABLE KEYS */;
 
--- Listage de la structure de la table evan_jaques_info1a_164_2023. parents
-CREATE TABLE IF NOT EXISTS `parents` (
-  `PNo` int(11) NOT NULL AUTO_INCREMENT,
+-- Listage de la structure de table evan_jaques_info1a_164_2023. t_parents
+CREATE TABLE IF NOT EXISTS `t_parents` (
+  `id_parents` int NOT NULL AUTO_INCREMENT,
   `PNom` varchar(50) DEFAULT NULL,
   `PPrenom` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`PNo`)
+  PRIMARY KEY (`id_parents`) USING BTREE
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Listage des données de la table evan_jaques_info1a_164_2023.parents : 1 rows
-/*!40000 ALTER TABLE `parents` DISABLE KEYS */;
-INSERT INTO `parents` (`PNo`, `PNom`, `PPrenom`) VALUES
+-- Listage des données de la table evan_jaques_info1a_164_2023.t_parents : 1 rows
+/*!40000 ALTER TABLE `t_parents` DISABLE KEYS */;
+INSERT INTO `t_parents` (`id_parents`, `PNom`, `PPrenom`) VALUES
 	(1, 'Lebois', 'Claudine');
-/*!40000 ALTER TABLE `parents` ENABLE KEYS */;
+/*!40000 ALTER TABLE `t_parents` ENABLE KEYS */;
 
--- Listage de la structure de la table evan_jaques_info1a_164_2023. telephones
-CREATE TABLE IF NOT EXISTS `telephones` (
-  `TNo` int(11) NOT NULL AUTO_INCREMENT,
-  `TNumTel` int(11) DEFAULT '0',
-  `TIndicatif` int(11) DEFAULT '0',
-  PRIMARY KEY (`TNo`)
+-- Listage de la structure de table evan_jaques_info1a_164_2023. t_telephones
+CREATE TABLE IF NOT EXISTS `t_telephones` (
+  `id_telephones` int NOT NULL AUTO_INCREMENT,
+  `TNumTel` int DEFAULT '0',
+  `TIndicatif` int DEFAULT '0',
+  PRIMARY KEY (`id_telephones`) USING BTREE
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Listage des données de la table evan_jaques_info1a_164_2023.telephones : 1 rows
-/*!40000 ALTER TABLE `telephones` DISABLE KEYS */;
-INSERT INTO `telephones` (`TNo`, `TNumTel`, `TIndicatif`) VALUES
+-- Listage des données de la table evan_jaques_info1a_164_2023.t_telephones : 1 rows
+/*!40000 ALTER TABLE `t_telephones` DISABLE KEYS */;
+INSERT INTO `t_telephones` (`id_telephones`, `TNumTel`, `TIndicatif`) VALUES
 	(1, 798342342, 41);
-/*!40000 ALTER TABLE `telephones` ENABLE KEYS */;
+/*!40000 ALTER TABLE `t_telephones` ENABLE KEYS */;
 
+/*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
-/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
