@@ -102,7 +102,7 @@ def genres_ajouter_wtf():
         try:
             if form.validate_on_submit():
                 name_genre_wtf = form.nom_genre_wtf.data
-                name_genre = name_genre_wtf.lower()
+                name_genre = name_genre_wtf
                 valeurs_insertion_dictionnaire = {"value_intitule_genre": name_genre}
                 print("valeurs_insertion_dictionnaire ", valeurs_insertion_dictionnaire)
 
