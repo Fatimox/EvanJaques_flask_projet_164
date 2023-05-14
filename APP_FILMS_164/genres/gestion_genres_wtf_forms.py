@@ -23,6 +23,13 @@ class FormWTFAjouterGenres(FlaskForm):
                                                                                   "d'espace à double, de double "
                                                                                   "apostrophe, de double trait union")
                                                                    ])
+    nom_parents_wtf = StringField("Ajouter le nom parent", validators=[Length(min=2, max=20, message="min 2 max 20"),
+                                                                 Regexp(nom_genre_regexp,
+                                                                        message="Pas de chiffres, de caractères "
+                                                                                "spéciaux, "
+                                                                                "d'espace à double, de double "
+                                                                                "apostrophe, de double trait union")
+                                                                 ])
     submit = SubmitField("Enregistrer genre")
 
 
