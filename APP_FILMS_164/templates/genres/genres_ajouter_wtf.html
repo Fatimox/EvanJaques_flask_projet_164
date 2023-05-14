@@ -19,9 +19,9 @@
 						{% endfor %}
 					</p>
 					<p>
-						{{ form.nom_parents_wtf.label }}<br>
-						{{ form.nom_parents_wtf(size=32) }}<br>
-						{% for error in form.nom_parents_wtf.errors %}
+						{{ form.prenom_parents_wtf.label }}<br>
+						{{ form.prenom_parents_wtf(size=32) }}<br>
+						{% for error in form.prenom_parents_wtf.errors %}
 							<span style="color: red;">[{{ error }}]</span>
 						{% endfor %}
 					</p>

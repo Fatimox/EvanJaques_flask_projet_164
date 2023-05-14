@@ -104,7 +104,7 @@ def genres_ajouter_wtf():
                 name_genre_wtf = form.nom_genre_wtf.data
                 name_genre = name_genre_wtf
 
-                name_parents_wtf = form.nom_parents_wtf.data
+                name_parents_wtf = form.prenom_parents_wtf.data
                 name_parents = name_parents_wtf
                 valeurs_insertion_dictionnaire = {"value_intitule_genre": name_genre, "value_intitule_parents": name_parents}
                 print("valeurs_insertion_dictionnaire ", valeurs_insertion_dictionnaire)
