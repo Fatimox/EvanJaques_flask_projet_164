@@ -34,7 +34,7 @@ USE evan_jaques_info1a_164_2023;
 
 
 -- Listage de la structure de la base pour evan_jaques_info1a_164_2023
-CREATE DATABASE IF NOT EXISTS `evan_jaques_info1a_164_2023` /*!40100 DEFAULT CHARACTER SET latin1 */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE IF NOT EXISTS `evan_jaques_info1a_164_2023` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `evan_jaques_info1a_164_2023`;
 
 -- Listage de la structure de table evan_jaques_info1a_164_2023. t_enfants
@@ -84,13 +84,29 @@ CREATE TABLE IF NOT EXISTS `t_parents` (
   `PNom` varchar(50) DEFAULT NULL,
   `PPrenom` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id_parents`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Listage des données de la table evan_jaques_info1a_164_2023.t_parents : 1 rows
+-- Listage des données de la table evan_jaques_info1a_164_2023.t_parents : 3 rows
 /*!40000 ALTER TABLE `t_parents` DISABLE KEYS */;
 INSERT INTO `t_parents` (`id_parents`, `PNom`, `PPrenom`) VALUES
-	(1, 'Lebois', 'Claudine');
+	(1, 'Lebois', 'Claudine'),
+	(2, 'Graf', 'Max'),
+	(3, 'Samuel', 'Delier');
 /*!40000 ALTER TABLE `t_parents` ENABLE KEYS */;
+
+-- Listage de la structure de table evan_jaques_info1a_164_2023. t_parents_avoir_mail
+CREATE TABLE IF NOT EXISTS `t_parents_avoir_mail` (
+  `id_parents_avoir_mail` int NOT NULL AUTO_INCREMENT,
+  `fk_parents` int DEFAULT NULL,
+  `fk_mail` int DEFAULT NULL,
+  PRIMARY KEY (`id_parents_avoir_mail`) USING BTREE,
+  KEY `FK_t_parents_avoir_mail_t_parents` (`fk_parents`),
+  KEY `FK_t_parents_avoir_mail_t_mail` (`fk_mail`),
+  CONSTRAINT `FK_t_parents_avoir_mail_t_mail` FOREIGN KEY (`fk_mail`) REFERENCES `t_mail` (`id_mail`),
+  CONSTRAINT `FK_t_parents_avoir_mail_t_parents` FOREIGN KEY (`fk_parents`) REFERENCES `t_parents` (`id_parents`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Listage des données de la table evan_jaques_info1a_164_2023.t_parents_avoir_mail : ~0 rows (environ)
 
 -- Listage de la structure de table evan_jaques_info1a_164_2023. t_telephones
 CREATE TABLE IF NOT EXISTS `t_telephones` (
@@ -111,3 +127,4 @@ INSERT INTO `t_telephones` (`id_telephones`, `TNumTel`, `TIndicatif`) VALUES
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
+
