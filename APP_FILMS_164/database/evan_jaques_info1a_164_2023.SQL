@@ -42,13 +42,18 @@ CREATE TABLE IF NOT EXISTS `t_enfants` (
   `id_enfants` int NOT NULL AUTO_INCREMENT,
   `ENom` varchar(50) DEFAULT NULL,
   `EPrenom` varchar(50) DEFAULT NULL,
+  `EDateNaissance` date DEFAULT NULL,
+  `ESexe` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id_enfants`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
--- Listage des données de la table evan_jaques_info1a_164_2023.t_enfants : 1 rows
+-- Listage des données de la table evan_jaques_info1a_164_2023.t_enfants : 4 rows
 /*!40000 ALTER TABLE `t_enfants` DISABLE KEYS */;
-INSERT INTO `t_enfants` (`id_enfants`, `ENom`, `EPrenom`) VALUES
-	(1, 'Frederic', 'Lebois');
+INSERT INTO `t_enfants` (`id_enfants`, `ENom`, `EPrenom`, `EDateNaissance`, `ESexe`) VALUES
+	(1, 'Chomel', 'Joel', '2015-04-24', 'm'),
+	(2, 'Voltaire', 'Arthur', '2017-06-14', 'm'),
+	(3, 'Dupuis', 'Fabrice', '2014-02-03', 'm'),
+	(4, 'Troille', 'Sophie', '2017-08-04', 'f');
 /*!40000 ALTER TABLE `t_enfants` ENABLE KEYS */;
 
 -- Listage de la structure de table evan_jaques_info1a_164_2023. t_factures
@@ -70,12 +75,14 @@ CREATE TABLE IF NOT EXISTS `t_mail` (
   `id_mail` int NOT NULL AUTO_INCREMENT,
   `MNomMail` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id_mail`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Listage des données de la table evan_jaques_info1a_164_2023.t_mail : 1 rows
+-- Listage des données de la table evan_jaques_info1a_164_2023.t_mail : 3 rows
 /*!40000 ALTER TABLE `t_mail` DISABLE KEYS */;
 INSERT INTO `t_mail` (`id_mail`, `MNomMail`) VALUES
-	(1, 'claudine.lebois@gmail.com');
+	(1, 'claudine.lebois@gmail.com'),
+	(2, 'sam.kaien@gmail.com'),
+	(3, 'max.delier@outlook.com');
 /*!40000 ALTER TABLE `t_mail` ENABLE KEYS */;
 
 -- Listage de la structure de table evan_jaques_info1a_164_2023. t_parents
@@ -91,7 +98,7 @@ CREATE TABLE IF NOT EXISTS `t_parents` (
 INSERT INTO `t_parents` (`id_parents`, `PNom`, `PPrenom`) VALUES
 	(1, 'Lebois', 'Claudine'),
 	(2, 'Graf', 'Max'),
-	(3, 'Samuel', 'Delier');
+	(3, 'Delier', 'Sam');
 /*!40000 ALTER TABLE `t_parents` ENABLE KEYS */;
 
 -- Listage de la structure de table evan_jaques_info1a_164_2023. t_parents_avoir_mail
@@ -101,12 +108,12 @@ CREATE TABLE IF NOT EXISTS `t_parents_avoir_mail` (
   `fk_mail` int DEFAULT NULL,
   PRIMARY KEY (`id_parents_avoir_mail`) USING BTREE,
   KEY `FK_t_parents_avoir_mail_t_parents` (`fk_parents`),
-  KEY `FK_t_parents_avoir_mail_t_mail` (`fk_mail`),
-  CONSTRAINT `FK_t_parents_avoir_mail_t_mail` FOREIGN KEY (`fk_mail`) REFERENCES `t_mail` (`id_mail`),
-  CONSTRAINT `FK_t_parents_avoir_mail_t_parents` FOREIGN KEY (`fk_parents`) REFERENCES `t_parents` (`id_parents`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `FK_t_parents_avoir_mail_t_mail` (`fk_mail`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Listage des données de la table evan_jaques_info1a_164_2023.t_parents_avoir_mail : ~0 rows (environ)
+INSERT INTO `t_parents_avoir_mail` (`id_parents_avoir_mail`, `fk_parents`, `fk_mail`) VALUES
+	(4, 1, 1);
 
 -- Listage de la structure de table evan_jaques_info1a_164_2023. t_telephones
 CREATE TABLE IF NOT EXISTS `t_telephones` (
@@ -127,4 +134,3 @@ INSERT INTO `t_telephones` (`id_telephones`, `TNumTel`, `TIndicatif`) VALUES
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
-
