@@ -43,17 +43,17 @@ CREATE TABLE IF NOT EXISTS `t_enfants` (
   `ENom` varchar(50) DEFAULT NULL,
   `EPrenom` varchar(50) DEFAULT NULL,
   `EDateNaissance` date DEFAULT NULL,
-  `ESexe` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id_enfants`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
--- Listage des données de la table evan_jaques_info1a_164_2023.t_enfants : 4 rows
+-- Listage des données de la table evan_jaques_info1a_164_2023.t_enfants : 5 rows
 /*!40000 ALTER TABLE `t_enfants` DISABLE KEYS */;
-INSERT INTO `t_enfants` (`id_enfants`, `ENom`, `EPrenom`, `EDateNaissance`, `ESexe`) VALUES
-	(1, 'Chomel', 'Joel', '2015-04-24', 'm'),
-	(2, 'Voltaire', 'Arthur', '2017-06-14', 'm'),
-	(3, 'Dupuis', 'Fabrice', '2014-02-03', 'm'),
-	(4, 'Troille', 'Sophie', '2017-08-04', 'f');
+INSERT INTO `t_enfants` (`id_enfants`, `ENom`, `EPrenom`, `EDateNaissance`) VALUES
+	(1, 'Chomel', 'Joel', '2015-04-24'),
+	(2, 'Voltaire', 'Arthur', '2017-06-14'),
+	(3, 'Dupuis', 'Fabrice', '2014-02-03'),
+	(4, 'Troille', 'Sophie', '2017-08-04'),
+	(6, 'Jaques', 'Evan', NULL);
 /*!40000 ALTER TABLE `t_enfants` ENABLE KEYS */;
 
 -- Listage de la structure de table evan_jaques_info1a_164_2023. t_factures

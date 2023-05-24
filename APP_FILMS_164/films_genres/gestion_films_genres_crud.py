@@ -32,7 +32,7 @@ def films_genres_afficher(id_film_sel):
     if request.method == "GET":
         try:
             with DBconnection() as mc_afficher:
-                strsql_genres_films_afficher_data = """SELECT id_enfants, ENom, EPrenom, EDateNaissance, ESexe FROM t_enfants"""
+                strsql_genres_films_afficher_data = """SELECT id_enfants, ENom, EPrenom, EDateNaissance FROM t_enfants"""
 
                 if id_film_sel == 0:
                     # le paramètre 0 permet d'afficher tous les films
