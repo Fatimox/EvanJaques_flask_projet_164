@@ -2,7 +2,7 @@
 {% block title %} Demo liste déroulante (WTF) {% endblock %}
 {% block body %}
 <div class="container">
-    <h1>Démo d'une liste déroulante (WTForms) sur la table "t_genre".</h1>
+    <h1>Démo d'une liste déroulante (WTForms) sur la table "t_parents".</h1>
     <p></p>
     <div class="alert alert-dismissible alert-info">
         <h4 class="alert-heading">Il ne faut pas utiliser ce système pour les tables intermédiaires avec plusieurs clés étrangères "fk_".</h4>
@@ -84,7 +84,7 @@
     <form action="{{ url_for('demo_select_dropdown_bootstrap') }}" method="POST" novalidate>
         <select id="essai_dropdown"  name="ma_petite_liste_unique" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
             {% for row in data_genres_drop_down %}
-                <option value="{{ row.id_genre }}">{{ row.intitule_genre }}</option>
+                <option value="{{ row.id_parents }}">{{ row.intitule_genre }}</option>
             {% endfor %}
         </select>
         <button type="submit" value="Submit">Choix</button>
