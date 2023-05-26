@@ -1,4 +1,4 @@
-"""Gestion des "routes" FLASK et des données pour les genres.
+"""Gestion des "routes" FLASK et des données pour les parents.
 Fichier : gestion_genres_crud.py
 Auteur : OM 2021.03.16
 """
@@ -12,9 +12,9 @@ from flask import url_for
 from APP_FILMS_164 import app
 from APP_FILMS_164.database.database_tools import DBconnection
 from APP_FILMS_164.erreurs.exceptions import *
-from APP_FILMS_164.genres.gestion_genres_wtf_forms import FormWTFAjouterGenres
-from APP_FILMS_164.genres.gestion_genres_wtf_forms import FormWTFDeleteGenre
-from APP_FILMS_164.genres.gestion_genres_wtf_forms import FormWTFUpdateGenre
+from APP_FILMS_164.parents.gestion_genres_wtf_forms import FormWTFAjouterGenres
+from APP_FILMS_164.parents.gestion_genres_wtf_forms import FormWTFDeleteGenre
+from APP_FILMS_164.parents.gestion_genres_wtf_forms import FormWTFUpdateGenre
 
 """
     Auteur : OM 2021.03.16
@@ -23,7 +23,7 @@ from APP_FILMS_164.genres.gestion_genres_wtf_forms import FormWTFUpdateGenre
     Test : ex : http://127.0.0.1:5575/genres_afficher
     
     Paramètres : order_by : ASC : Ascendant, DESC : Descendant
-                id_genre_sel = 0 >> tous les genres.
+                id_genre_sel = 0 >> tous les parents.
                 id_genre_sel = "n" affiche le genre dont l'id est "n"
 """
 
@@ -64,7 +64,7 @@ def genres_afficher(order_by, id_genre_sel):
                 else:
                     # Dans tous les autres cas, c'est que la table "t_parents" est vide.
                     # OM 2020.04.09 La ligne ci-dessous permet de donner un sentiment rassurant aux utilisateurs.
-                    flash(f"Données genres affichés !!", "success")
+                    flash(f"Données parents affichés !!", "success")
 
         except Exception as Exception_genres_afficher:
             raise ExceptionGenresAfficher(f"fichier : {Path(__file__).name}  ;  "
@@ -72,7 +72,7 @@ def genres_afficher(order_by, id_genre_sel):
                                           f"{Exception_genres_afficher}")
 
     # Envoie la page "HTML" au serveur.
-    return render_template("genres/genres_afficher.html", data=data_genres)
+    return render_template("parents/genres_afficher.html", data=data_genres)
 
 
 """
@@ -85,7 +85,7 @@ def genres_afficher(order_by, id_genre_sel):
     
     But : Ajouter un genre pour un film
     
-    Remarque :  Dans le champ "name_genre_html" du formulaire "genres/genres_ajouter.html",
+    Remarque :  Dans le champ "name_genre_html" du formulaire "parents/genres_ajouter.html",
                 le contrôle de la saisie s'effectue ici en Python.
                 On transforme la saisie en minuscules.
                 On ne doit pas accepter des valeurs vides, des valeurs avec des chiffres,
@@ -124,20 +124,20 @@ def genres_ajouter_wtf():
                                             f"{genres_ajouter_wtf.__name__} ; "
                                             f"{Exception_genres_ajouter_wtf}")
 
-    return render_template("genres/genres_ajouter_wtf.html", form=form)
+    return render_template("parents/genres_ajouter_wtf.html", form=form)
 
 
 """
     Auteur : OM 2021.03.29
     Définition d'une "route" /genre_update
     
-    Test : ex cliquer sur le menu "genres" puis cliquer sur le bouton "EDIT" d'un "genre"
+    Test : ex cliquer sur le menu "parents" puis cliquer sur le bouton "EDIT" d'un "genre"
     
     Paramètres : sans
     
     But : Editer(update) un genre qui a été sélectionné dans le formulaire "genres_afficher.html"
     
-    Remarque :  Dans le champ "nom_genre_update_wtf" du formulaire "genres/genre_update_wtf.html",
+    Remarque :  Dans le champ "nom_genre_update_wtf" du formulaire "parents/genre_update_wtf.html",
                 le contrôle de la saisie s'effectue ici en Python.
                 On transforme la saisie en minuscules.
                 On ne doit pas accepter des valeurs vides, des valeurs avec des chiffres,
@@ -201,20 +201,20 @@ def genre_update_wtf():
                                       f"{genre_update_wtf.__name__} ; "
                                       f"{Exception_genre_update_wtf}")
 
-    return render_template("genres/genre_update_wtf.html", form_update=form_update)
+    return render_template("parents/genre_update_wtf.html", form_update=form_update)
 
 
 """
     Auteur : OM 2021.04.08
     Définition d'une "route" /genre_delete
     
-    Test : ex. cliquer sur le menu "genres" puis cliquer sur le bouton "DELETE" d'un "genre"
+    Test : ex. cliquer sur le menu "parents" puis cliquer sur le bouton "DELETE" d'un "genre"
     
     Paramètres : sans
     
     But : Effacer(delete) un genre qui a été sélectionné dans le formulaire "genres_afficher.html"
     
-    Remarque :  Dans le champ "nom_genre_delete_wtf" du formulaire "genres/genre_delete_wtf.html",
+    Remarque :  Dans le champ "nom_genre_delete_wtf" du formulaire "parents/genre_delete_wtf.html",
                 le contrôle de la saisie est désactivée. On doit simplement cliquer sur "DELETE"
 """
 
@@ -237,7 +237,7 @@ def genre_delete_wtf():
 
             if form_delete.submit_btn_conf_del.data:
                 # Récupère les données afin d'afficher à nouveau
-                # le formulaire "genres/genre_delete_wtf.html" lorsque le bouton "Etes-vous sur d'effacer ?" est cliqué.
+                # le formulaire "parents/genre_delete_wtf.html" lorsque le bouton "Etes-vous sur d'effacer ?" est cliqué.
                 data_films_attribue_genre_delete = session['data_films_attribue_genre_delete']
                 print("data_films_attribue_genre_delete ", data_films_attribue_genre_delete)
 
@@ -284,7 +284,7 @@ def genre_delete_wtf():
                 print("data_films_attribue_genre_delete...", data_films_attribue_genre_delete)
 
                 # Nécessaire pour mémoriser les données afin d'afficher à nouveau
-                # le formulaire "genres/genre_delete_wtf.html" lorsque le bouton "Etes-vous sur d'effacer ?" est cliqué.
+                # le formulaire "parents/genre_delete_wtf.html" lorsque le bouton "Etes-vous sur d'effacer ?" est cliqué.
                 session['data_films_attribue_genre_delete'] = data_films_attribue_genre_delete
 
                 # Opération sur la BD pour récupérer "id_parents" et "intitule_genre" de la "t_parents"
@@ -308,7 +308,7 @@ def genre_delete_wtf():
                                       f"{genre_delete_wtf.__name__} ; "
                                       f"{Exception_genre_delete_wtf}")
 
-    return render_template("genres/genre_delete_wtf.html",
+    return render_template("parents/genre_delete_wtf.html",
                            form_delete=form_delete,
                            btn_submit_del=btn_submit_del,
                            data_films_associes=data_films_attribue_genre_delete)

@@ -41,7 +41,7 @@ def film_add_wtf():
                 valeurs_insertion_dictionnaire = {"value_nom_film": nom_film_add, "value_prenom_film": prenom_film_add}
                 print("valeurs_insertion_dictionnaire ", valeurs_insertion_dictionnaire)
 
-                strsql_insert_film = """INSERT INTO t_enfants (id_enfants,ENom,EPrenom) VALUES (NULL,%(value_nom_film)s,%(value_prenom_film)s) """
+                strsql_insert_film = """INSERT INTO t_enfants (id_enfants,Nom,Prenom) VALUES (NULL,%(value_nom_film)s,%(value_prenom_film)s) """
                 with DBconnection() as mconn_bd:
                     mconn_bd.execute(strsql_insert_film, valeurs_insertion_dictionnaire)
 
