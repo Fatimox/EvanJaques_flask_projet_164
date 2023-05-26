@@ -20,9 +20,6 @@
 						  Date de naissance
 						</th>
 						<th class="" >
-						  Sexe
-						</th>
-						<th class="" >
 						  Affiche
 						</th>
 					</tr>
@@ -35,16 +32,13 @@
 						  {{ row.id_enfants }}
 					  </th>
 					  <th class="align-middle">
-						{{ row.ENom }}
+						{{ row.Nom }}
 					  </th>
 					<th class="align-middle">
-						{{ row.EPrenom}}
+						{{ row.Prenom}}
 					  </th>
 					  <th class="align-middle">
-						{{ row.EDateNaissance|default("", True) }}
-					  </th>
-					  <th class="align-middle">
-						{{ row.ESexe|default("", True) }}
+						{{ row.DateNaissance|default("", True) }}
 					  </th>
 					  <th class="align-middle">
 						<img class="img" src={{ row.cover_link_film|default(None, True) }} style="border: 0;display:block; width:150px; max-height:auto;"  alt = "image masquée FFP8 (in COVID-19 Memory) (absente) mod 164">

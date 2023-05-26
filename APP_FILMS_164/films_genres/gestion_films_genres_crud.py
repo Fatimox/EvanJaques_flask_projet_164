@@ -40,10 +40,10 @@ def films_genres_afficher(id_film_sel):
                     mc_afficher.execute(strsql_genres_films_afficher_data)
                 else:
                     # Constitution d'un dictionnaire pour associer l'id du film sélectionné avec un nom de variable
-                    valeur_id_film_selected_dictionnaire = {"value_id_film_selected": id_film_sel}
+                    valeur_id_film_selected_dictionnaire = {"value_id_enfants_selected": id_film_sel}
                     # En MySql l'instruction HAVING fonctionne comme un WHERE... mais doit être associée à un GROUP BY
                     # L'opérateur += permet de concaténer une nouvelle valeur à la valeur de gauche préalablement définie.
-                    strsql_genres_films_afficher_data += """ HAVING id_enfants= %(value_id_film_selected)s"""
+                    strsql_genres_films_afficher_data += """ HAVING id_enfants= %(value_id_enfants_selected)s"""
 
                     mc_afficher.execute(strsql_genres_films_afficher_data, valeur_id_film_selected_dictionnaire)
 
@@ -90,7 +90,7 @@ def edit_genre_film_selected():
     if request.method == "GET":
         try:
             with DBconnection() as mc_afficher:
-                strsql_genres_afficher = """SELECT id_parents, intitule_genre FROM t_parents ORDER BY id_parents ASC"""
+                strsql_genres_afficher = """SELECT id_sante, Allergie FROM t_sante ORDER BY id_sante ASC"""
                 mc_afficher.execute(strsql_genres_afficher)
             data_genres_all = mc_afficher.fetchall()
             print("dans edit_genre_film_selected ---> data_genres_all", data_genres_all)
@@ -107,7 +107,7 @@ def edit_genre_film_selected():
             session['session_id_film_genres_edit'] = id_film_genres_edit
 
             # Constitution d'un dictionnaire pour associer l'id du film sélectionné avec un nom de variable
-            valeur_id_film_selected_dictionnaire = {"value_id_film_selected": id_film_genres_edit}
+            valeur_id_film_selected_dictionnaire = {"value_id_enfants_selected": id_film_genres_edit}
 
             # Récupère les données grâce à 3 requêtes MySql définie dans la fonction genres_films_afficher_data
             # 1) Sélection du film choisi
@@ -276,17 +276,17 @@ def genres_films_afficher_data(valeur_id_film_selected_dict):
         strsql_film_selected = """SELECT id_film, nom_film, duree_film, description_film, cover_link_film, date_sortie_film, GROUP_CONCAT(id_parents) as GenresFilms FROM t_genre_film
                                         INNER JOIN t_film ON t_film.id_film = t_genre_film.fk_film
                                         INNER JOIN t_parents ON t_parents.id_parents = t_genre_film.fk_genre
-                                        WHERE id_film = %(value_id_film_selected)s"""
+                                        WHERE id_film = %(value_id_enfants_selected)s"""
 
         strsql_genres_films_non_attribues = """SELECT id_parents, intitule_genre FROM t_parents WHERE id_parents not in(SELECT id_parents as idGenresFilms FROM t_genre_film
                                                     INNER JOIN t_film ON t_film.id_film = t_genre_film.fk_film
                                                     INNER JOIN t_parents ON t_parents.id_parents = t_genre_film.fk_genre
-                                                    WHERE id_film = %(value_id_film_selected)s)"""
+                                                    WHERE id_film = %(value_id_enfants_selected)s)"""
 
         strsql_genres_films_attribues = """SELECT id_film, id_parents, intitule_genre FROM t_genre_film
                                             INNER JOIN t_film ON t_film.id_film = t_genre_film.fk_film
                                             INNER JOIN t_parents ON t_parents.id_parents = t_genre_film.fk_genre
-                                            WHERE id_film = %(value_id_film_selected)s"""
+                                            WHERE id_film = %(value_id_enfants_selected)s"""
 
         # Du fait de l'utilisation des "context managers" on accède au curseur grâce au "with".
         with DBconnection() as mc_afficher:

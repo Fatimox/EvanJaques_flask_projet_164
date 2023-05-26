@@ -22,7 +22,7 @@ Test : exemple: cliquer sur le menu "Films/Genres" puis cliquer sur le bouton "A
 Paramètres : sans
 
 
-Remarque :  Dans le champ "nom_film_update_wtf" du formulaire "films/films_update_wtf.html",
+Remarque :  Dans le champ "nom_enfants_wtf" du formulaire "films/films_update_wtf.html",
             le contrôle de la saisie s'effectue ici en Python dans le fichier ""
             On ne doit pas accepter un champ vide.
 """
@@ -38,10 +38,10 @@ def film_add_wtf():
                 nom_film_add = form_add_film.nom_film_add_wtf.data
                 prenom_film_add = form_add_film.prenom_film_add_wtf.data
 
-                valeurs_insertion_dictionnaire = {"value_nom_film": nom_film_add, "value_prenom_film": prenom_film_add}
+                valeurs_insertion_dictionnaire = {"value_nom_enfants": nom_film_add, "value_prenom_film": prenom_film_add}
                 print("valeurs_insertion_dictionnaire ", valeurs_insertion_dictionnaire)
 
-                strsql_insert_film = """INSERT INTO t_enfants (id_enfants,Nom,Prenom) VALUES (NULL,%(value_nom_film)s,%(value_prenom_film)s) """
+                strsql_insert_film = """INSERT INTO t_enfants (id_enfants,Nom,Prenom) VALUES (NULL,%(value_nom_enfants)s,%(value_prenom_film)s) """
                 with DBconnection() as mconn_bd:
                     mconn_bd.execute(strsql_insert_film, valeurs_insertion_dictionnaire)
 
@@ -69,7 +69,7 @@ Paramètres : sans
 
 But : Editer(update) un genre qui a été sélectionné dans le formulaire "genres_afficher.html"
 
-Remarque :  Dans le champ "nom_film_update_wtf" du formulaire "films/films_update_wtf.html",
+Remarque :  Dans le champ "nom_enfants_wtf" du formulaire "films/films_update_wtf.html",
             le contrôle de la saisie s'effectue ici en Python.
             On ne doit pas accepter un champ vide.
 """
@@ -86,27 +86,21 @@ def film_update_wtf():
         print(" on submit ", form_update_film.validate_on_submit())
         if form_update_film.validate_on_submit():
             # Récupèrer la valeur du champ depuis "genre_update_wtf.html" après avoir cliqué sur "SUBMIT".
-            nom_film_update = form_update_film.nom_film_update_wtf.data
-            duree_film_update = form_update_film.duree_film_update_wtf.data
-            description_film_update = form_update_film.description_film_update_wtf.data
-            cover_link_film_update = form_update_film.cover_link_film_update_wtf.data
-            datesortie_film_update = form_update_film.datesortie_film_update_wtf.data
+            nom_film_update = form_update_film.nom_enfants_wtf.data
+            duree_film_update = form_update_film.prenom_enfants_wtf.data
+            datesortie_film_update = form_update_film.datenaissance_enfants_wtf.data
 
-            valeur_update_dictionnaire = {"value_id_film": id_film_update,
-                                          "value_nom_film": nom_film_update,
-                                          "value_duree_film": duree_film_update,
-                                          "value_description_film": description_film_update,
-                                          "value_cover_link_film": cover_link_film_update,
-                                          "value_datesortie_film": datesortie_film_update
+            valeur_update_dictionnaire = {"value_id_enfants": id_film_update,
+                                          "value_nom_enfants": nom_film_update,
+                                          "value_prenom_enfants": duree_film_update,
+                                          "value_datenaissance_enfants": datesortie_film_update
                                           }
             print("valeur_update_dictionnaire ", valeur_update_dictionnaire)
 
-            str_sql_update_nom_film = """UPDATE t_film SET nom_film = %(value_nom_film)s,
-                                                            duree_film = %(value_duree_film)s,
-                                                            description_film = %(value_description_film)s,
-                                                            cover_link_film = %(value_cover_link_film)s,
-                                                            date_sortie_film = %(value_datesortie_film)s
-                                                            WHERE id_film = %(value_id_film)s"""
+            str_sql_update_nom_film = """UPDATE t_enfants SET Nom = %(value_nom_enfants)s,
+                                                            Prenom = %(value_prenom_enfants)s,
+                                                            DateNaissance = %(value_datenaissance_enfants)s
+                                                            WHERE id_enfants = %(value_id_enfants)s"""
             with DBconnection() as mconn_bd:
                 mconn_bd.execute(str_sql_update_nom_film, valeur_update_dictionnaire)
 
@@ -118,23 +112,21 @@ def film_update_wtf():
             return redirect(url_for('films_genres_afficher', id_film_sel=id_film_update))
         elif request.method == "GET":
             # Opération sur la BD pour récupérer "id_film" et "intitule_genre" de la "t_parents"
-            str_sql_id_film = "SELECT * FROM t_film WHERE id_film = %(value_id_film)s"
-            valeur_select_dictionnaire = {"value_id_film": id_film_update}
+            str_sql_id_film = "SELECT * FROM t_enfants WHERE id_enfants = %(value_id_enfants)s"
+            valeur_select_dictionnaire = {"value_id_enfants": id_film_update}
             with DBconnection() as mybd_conn:
                 mybd_conn.execute(str_sql_id_film, valeur_select_dictionnaire)
             # Une seule valeur est suffisante "fetchone()", vu qu'il n'y a qu'un seul champ "nom genre" pour l'UPDATE
             data_film = mybd_conn.fetchone()
             print("data_film ", data_film, " type ", type(data_film), " genre ",
-                  data_film["nom_film"])
+                  data_film["Nom"])
 
             # Afficher la valeur sélectionnée dans le champ du formulaire "film_update_wtf.html"
-            form_update_film.nom_film_update_wtf.data = data_film["nom_film"]
-            form_update_film.duree_film_update_wtf.data = data_film["duree_film"]
+            form_update_film.nom_enfants_wtf.data = data_film["Nom"]
+            form_update_film.prenom_enfants_wtf.data = data_film["Prenom"]
             # Debug simple pour contrôler la valeur dans la console "run" de PyCharm
-            print(f" duree film  ", data_film["duree_film"], "  type ", type(data_film["duree_film"]))
-            form_update_film.description_film_update_wtf.data = data_film["description_film"]
-            form_update_film.cover_link_film_update_wtf.data = data_film["cover_link_film"]
-            form_update_film.datesortie_film_update_wtf.data = data_film["date_sortie_film"]
+            print(f" duree film  ", data_film["Prenom"], "  type ", type(data_film["Prenom"]))
+            form_update_film.datenaissance_enfants_wtf.data = data_film["DateNaissance"]
 
     except Exception as Exception_film_update_wtf:
         raise ExceptionFilmUpdateWtf(f"fichier : {Path(__file__).name}  ;  "
@@ -185,11 +177,11 @@ def film_delete_wtf():
 
         # L'utilisateur a vraiment décidé d'effacer.
         if form_delete_film.submit_btn_del_film.data:
-            valeur_delete_dictionnaire = {"value_id_film": id_film_delete}
+            valeur_delete_dictionnaire = {"value_id_enfants": id_film_delete}
             print("valeur_delete_dictionnaire ", valeur_delete_dictionnaire)
 
-            str_sql_delete_fk_film_genre = """DELETE FROM t_genre_film WHERE fk_film = %(value_id_film)s"""
-            str_sql_delete_film = """DELETE FROM t_film WHERE id_film = %(value_id_film)s"""
+            str_sql_delete_fk_film_genre = """DELETE FROM t_genre_film WHERE fk_film = %(value_id_enfants)s"""
+            str_sql_delete_film = """DELETE FROM t_film WHERE id_film = %(value_id_enfants)s"""
             # Manière brutale d'effacer d'abord la "fk_film", même si elle n'existe pas dans la "t_genre_film"
             # Ensuite on peut effacer le film vu qu'il n'est plus "lié" (INNODB) dans la "t_genre_film"
             with DBconnection() as mconn_bd:
@@ -202,11 +194,11 @@ def film_delete_wtf():
             # afficher les données
             return redirect(url_for('films_genres_afficher', id_film_sel=0))
         if request.method == "GET":
-            valeur_select_dictionnaire = {"value_id_film": id_film_delete}
+            valeur_select_dictionnaire = {"value_id_enfants": id_film_delete}
             print(id_film_delete, type(id_film_delete))
 
             # Requête qui affiche le film qui doit être efffacé.
-            str_sql_genres_films_delete = """SELECT * FROM t_film WHERE id_film = %(value_id_film)s"""
+            str_sql_genres_films_delete = """SELECT * FROM t_film WHERE id_film = %(value_id_enfants)s"""
 
             with DBconnection() as mydb_conn:
                 mydb_conn.execute(str_sql_genres_films_delete, valeur_select_dictionnaire)
