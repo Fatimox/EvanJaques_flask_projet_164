@@ -13,14 +13,14 @@
 				<div class="form-group">
 					<p>
 						{{ form_update_film.nom_enfants_wtf.label }}<br>
-						{{ form_update_film.nom_enfants_wtf(cols=50, rows=3) }}<br>
+						{{ form_update_film.nom_enfants_wtf(size=32) }}<br>
 						{% for error in form_update_film.nom_enfants_wtf.errors %}
 						<span style="color: red;">[{{ error }}]</span>
 						{% endfor %}
 					</p>
 					<p>
 						{{ form_update_film.prenom_enfants_wtf.label }}<br>
-						{{ form_update_film.prenom_enfants_wtf(cols=50, rows=3) }}<br>
+						{{ form_update_film.prenom_enfants_wtf(size=32) }}<br>
 						{% for error in form_update_film.prenom_enfants_wtf.errors %}
 						<span style="color: red;">[{{ error }}]</span>
 						{% endfor %}

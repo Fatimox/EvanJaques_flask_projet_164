@@ -31,6 +31,8 @@ class FormWTFAddFilm(FlaskForm):
                                                                                   "d'espace à double, de double "
                                                                                   "apostrophe, de double trait union")
                                                                    ])
+    datenaissance_enfants_add = DateField("Date de naissance", validators=[InputRequired("Date obligatoire"),
+                                                                           DataRequired("Date non valide")])
 
     submit = SubmitField("Enregistrer film")
 
@@ -41,20 +43,27 @@ class FormWTFUpdateFilm(FlaskForm):
         Définition d'un "bouton" submit avec un libellé personnalisé.
     """
 
-    nom_enfants_wtf = StringField("Nom de l'enfant", widget=TextArea())
-    prenom_enfants_wtf = IntegerField("Prénom de l'enfant", validators=[NumberRange(min=1, max=5000,
-                                                                                            message=u"Min %(min)d et "
-                                                                                                    u"max %(max)d "
-                                                                                                    u"Selon Wikipédia "
-                                                                                                    u"L'Incendie du "
-                                                                                                    u"monastère du "
-                                                                                                    u"Lotus rouge "
-                                                                                                    u"durée 1620 "
-                                                                                                    u"min")])
+    nom_film_regexp = ""
+    nom_enfants_wtf = StringField("Nom de l'enfant", validators=[Length(min=2, max=20, message="min 2 max 20"),
+                                                                          Regexp(nom_film_regexp,
+                                                                                 message="Pas de chiffres, de "
+                                                                                         "caractères "
+                                                                                         "spéciaux, "
+                                                                                         "d'espace à double, de double "
+                                                                                         "apostrophe, de double trait "
+                                                                                         "union")
+                                                                          ])
+    prenom_enfants_wtf = StringField("Prénom de l'enfant", validators=[Length(min=2, max=20, message="min 2 max 20"),
+                                                                          Regexp(nom_film_regexp,
+                                                                                 message="Pas de chiffres, de "
+                                                                                         "caractères "
+                                                                                         "spéciaux, "
+                                                                                         "d'espace à double, de double "
+                                                                                         "apostrophe, de double trait "
+                                                                                         "union")
+                                                                          ])
 
-    description_film_update_wtf = StringField("Description du film ", widget=TextArea())
-    cover_link_film_update_wtf = StringField("Lien de l'affiche du film ", widget=TextArea())
-    datenaissance_enfants_wtf = DateField("Date de sortie du film", validators=[InputRequired("Date obligatoire"),
+    datenaissance_enfants_add= DateField("Date de naissance", validators=[InputRequired("Date obligatoire"),
                                                                                  DataRequired("Date non valide")])
     submit = SubmitField("Update film")
 
