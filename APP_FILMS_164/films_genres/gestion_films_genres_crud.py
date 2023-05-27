@@ -32,7 +32,11 @@ def films_genres_afficher(id_film_sel):
     if request.method == "GET":
         try:
             with DBconnection() as mc_afficher:
-                strsql_genres_films_afficher_data = """SELECT id_enfants, Nom, Prenom, DateNaissance FROM t_enfants"""
+                strsql_genres_films_afficher_data = """SELECT id_enfants, Nom, Prenom, DateNaissance,
+                                                            GROUP_CONCAT(Allergie) as GenresFilms FROM t_enfants_sante
+                                                            RIGHT JOIN t_enfants ON t_enfants.id_enfants = t_enfants_sante.fk_enfants
+                                                            LEFT JOIN t_sante ON t_sante.id_sante = t_enfants_sante.fk_sante
+                                                            GROUP BY id_enfants"""
 
                 if id_film_sel == 0:
                     # le paramètre 0 permet d'afficher tous les enfants
