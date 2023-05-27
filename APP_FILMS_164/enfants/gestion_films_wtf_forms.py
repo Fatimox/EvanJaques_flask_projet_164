@@ -1,4 +1,4 @@
-"""Gestion des formulaires avec WTF pour les films
+"""Gestion des formulaires avec WTF pour les enfants
 Fichier : gestion_films_wtf_forms.py
 Auteur : OM 2022.04.11
 
@@ -31,8 +31,6 @@ class FormWTFAddFilm(FlaskForm):
                                                                                   "d'espace à double, de double "
                                                                                   "apostrophe, de double trait union")
                                                                    ])
-    datenaissance_enfants_add = DateField("Date de naissance", validators=[InputRequired("Date obligatoire"),
-                                                                           DataRequired("Date non valide")])
 
     submit = SubmitField("Enregistrer film")
 
@@ -63,7 +61,7 @@ class FormWTFUpdateFilm(FlaskForm):
                                                                                          "union")
                                                                           ])
 
-    datenaissance_enfants_add= DateField("Date de naissance", validators=[InputRequired("Date obligatoire"),
+    datenaissance_enfants_wtf = DateField("Date de naissance", validators=[InputRequired("Date obligatoire"),
                                                                                  DataRequired("Date non valide")])
     submit = SubmitField("Update film")
 
@@ -75,7 +73,7 @@ class FormWTFDeleteFilm(FlaskForm):
         nom_film_delete_wtf : Champ qui reçoit la valeur du film, lecture seule. (readonly=true)
         submit_btn_del : Bouton d'effacement "DEFINITIF".
         submit_btn_conf_del : Bouton de confirmation pour effacer un "film".
-        submit_btn_annuler : Bouton qui permet d'afficher la table "t_film".
+        submit_btn_annuler : Bouton qui permet d'afficher la table "t_enfants".
     """
     nom_film_delete_wtf = StringField("Effacer ce film")
     submit_btn_del_film = SubmitField("Effacer film")

@@ -36,16 +36,16 @@
 				<tbody>
 				<tr>
 					<th class="align-middle">
-						{{ row.id_film }}
+						{{ row.id_enfants }}
 					</th>
 					<th class="align-middle">
-						{{ row.nom_film }}
+						{{ row.Nom }}
 					</th>
 					<th class="align-middle">
-						{{ row.duree_film|default("", True) }}
+						{{ row.Prenom|default("", True) }}
 					</th>
 					<th class="align-middle">
-						{{ row.date_sortie_film|default("", True) }}
+						{{ row.DateNaissance|default("", True) }}
 					</th>
 					<th class="align-middle">
 						{{ row.description_film|default("", True) }}

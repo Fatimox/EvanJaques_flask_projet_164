@@ -255,8 +255,8 @@ def genre_delete_wtf():
                 str_sql_delete_fk_mail = """DELETE FROM t_parents_mail WHERE fk_mail = %(value_id_genre)s"""
                 str_sql_delete_fk_telephone = """DELETE FROM t_parents_telephone WHERE fk_telephone = %(value_id_genre)s"""
                 str_sql_delete_parents = """DELETE FROM t_parents WHERE id_parents = %(value_id_genre)s"""
-                # Manière brutale d'effacer d'abord la "fk_genre", même si elle n'existe pas dans la "t_genre_film"
-                # Ensuite on peut effacer le genre vu qu'il n'est plus "lié" (INNODB) dans la "t_genre_film"
+                # Manière brutale d'effacer d'abord la "fk_genre", même si elle n'existe pas dans la "t_enfants_sante"
+                # Ensuite on peut effacer le genre vu qu'il n'est plus "lié" (INNODB) dans la "t_enfants_sante"
                 with DBconnection() as mconn_bd:
                     mconn_bd.execute(str_sql_delete_fk_adresse, valeur_delete_dictionnaire)
                     mconn_bd.execute(str_sql_delete_fk_factures, valeur_delete_dictionnaire)
