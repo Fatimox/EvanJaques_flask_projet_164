@@ -17,14 +17,14 @@ class FormWTFAddFilm(FlaskForm):
         Définition d'un "bouton" submit avec un libellé personnalisé.
     """
     nom_film_regexp = ""
-    nom_film_add_wtf = StringField("Nom de l'enfant ", validators=[Length(min=2, max=2000, message="min 2 max 20"),
+    nom_film_add_wtf = StringField("Ajouter le nom de l'enfant ", validators=[Length(min=2, max=2000, message="min 2 max 20"),
                                                                Regexp(nom_film_regexp,
                                                                       message="Pas de chiffres, de caractères "
                                                                               "spéciaux, "
                                                                               "d'espace à double, de double "
                                                                               "apostrophe, de double trait union")
                                                                ])
-    prenom_film_add_wtf = StringField("Prénom de l'enfant ", validators=[Length(min=2, max=2000, message="min 2 max 20"),
+    prenom_film_add_wtf = StringField("Ajouter le prénom de l'enfant ", validators=[Length(min=2, max=2000, message="min 2 max 20"),
                                                                    Regexp(nom_film_regexp,
                                                                           message="Pas de chiffres, de caractères "
                                                                                   "spéciaux, "
@@ -32,7 +32,7 @@ class FormWTFAddFilm(FlaskForm):
                                                                                   "apostrophe, de double trait union")
                                                                    ])
 
-    submit = SubmitField("Enregistrer film")
+    submit = SubmitField("Enregistrer l'enfant")
 
 
 class FormWTFUpdateFilm(FlaskForm):
@@ -63,7 +63,7 @@ class FormWTFUpdateFilm(FlaskForm):
 
     datenaissance_enfants_wtf = DateField("Date de naissance", validators=[InputRequired("Date obligatoire"),
                                                                                  DataRequired("Date non valide")])
-    submit = SubmitField("Update film")
+    submit = SubmitField("Update enfant")
 
 
 class FormWTFDeleteFilm(FlaskForm):

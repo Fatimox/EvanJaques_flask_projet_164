@@ -34,11 +34,18 @@ def genres_afficher(order_by, id_genre_sel):
         try:
             with DBconnection() as mc_afficher:
                 if order_by == "ASC" and id_genre_sel == 0:
-                    strsql_genres_afficher = """SELECT id_parents, Nom, Prenom,
-                                                            GROUP_CONCAT(NomMail) as ParentsMail FROM t_parents_mail
-                                                            RIGHT JOIN t_parents ON t_parents.id_parents = t_parents_mail.fk_parents
-                                                            LEFT JOIN t_mail ON t_mail.id_mail = t_parents_mail.fk_mail
-                                                            GROUP BY id_parents"""
+                    strsql_genres_afficher = """SELECT t_parents.id_parents, t_parents.Nom, t_parents.Prenom,
+                                                    GROUP_CONCAT(t_mail.NomMail) AS ParentsMail,
+                                                    GROUP_CONCAT(t_telephone.NumTel) AS ParentsTel,
+                                                    GROUP_CONCAT(CONCAT_WS(' ', t_adresse.NomRue, t_adresse.NumeroRue, t_adresse.Ville, t_adresse.Npa)) AS ParentsAdresse FROM t_parents
+                                                    LEFT JOIN t_parents_mail ON t_parents.id_parents = t_parents_mail.fk_parents
+                                                    LEFT JOIN t_mail ON t_mail.id_mail = t_parents_mail.fk_mail
+                                                    LEFT JOIN t_parents_telephone ON t_parents.id_parents = t_parents_telephone.fk_parents
+                                                    LEFT JOIN t_telephone ON t_telephone.id_telephone = t_parents_telephone.fk_telephone
+                                                    LEFT JOIN t_parents_adresse ON t_parents.id_parents = t_parents_adresse.fk_parents
+                                                    LEFT JOIN t_adresse ON t_adresse.id_adresse = t_parents_adresse.fk_adresse
+                                                    GROUP BY t_parents.id_parents, t_parents.Nom, t_parents.Prenom;"""
+
                     mc_afficher.execute(strsql_genres_afficher)
                 elif order_by == "ASC":
                     # C'EST LA QUE VOUS ALLEZ DEVOIR PLACER VOTRE PROPRE LOGIQUE MySql
