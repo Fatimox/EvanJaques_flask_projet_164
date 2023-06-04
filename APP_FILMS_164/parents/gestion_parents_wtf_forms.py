@@ -15,21 +15,30 @@ class FormWTFAjouterGenres(FlaskForm):
         Dans le formulaire "factures_ajouter_wtf.html" on impose que le champ soit rempli.
         Définition d'un "bouton" submit avec un libellé personnalisé.
     """
-    nom_genre_regexp = "^([A-Z]|[a-zÀ-ÖØ-öø-ÿ])[A-Za-zÀ-ÖØ-öø-ÿ]*['\- ]?[A-Za-zÀ-ÖØ-öø-ÿ]+$"
+    nom_parents_regexp = "^([A-Z]|[a-zÀ-ÖØ-öø-ÿ])[A-Za-zÀ-ÖØ-öø-ÿ]*['\- ]?[A-Za-zÀ-ÖØ-öø-ÿ]+$"
+    telephone_parents_regexp = ""
     nom_genre_wtf = StringField("Ajouter le nom du parent", validators=[Length(min=2, max=20, message="min 2 max 20"),
-                                                                   Regexp(nom_genre_regexp,
+                                                                   Regexp(nom_parents_regexp,
                                                                           message="Pas de chiffres, de caractères "
                                                                                   "spéciaux, "
                                                                                   "d'espace à double, de double "
                                                                                   "apostrophe, de double trait union")
                                                                    ])
     prenom_parents_wtf = StringField("Ajouter le prénom du parent", validators=[Length(min=2, max=20, message="min 2 max 20"),
-                                                                 Regexp(nom_genre_regexp,
+                                                                 Regexp(nom_parents_regexp,
                                                                         message="Pas de chiffres, de caractères "
                                                                                 "spéciaux, "
                                                                                 "d'espace à double, de double "
                                                                                 "apostrophe, de double trait union")
                                                                  ])
+    telephone_parents_wtf = StringField("Ajouter le prénom du parent",
+                                     validators=[Length(min=2, max=20, message="min 2 max 20"),
+                                                 Regexp(telephone_parents_regexp,
+                                                        message="Pas de chiffres, de caractères "
+                                                                "spéciaux, "
+                                                                "d'espace à double, de double "
+                                                                "apostrophe, de double trait union")
+                                                 ])
     submit = SubmitField("Enregistrer le parent")
 
 

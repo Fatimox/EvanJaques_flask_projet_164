@@ -117,12 +117,17 @@ def genres_ajouter_wtf():
 
                 name_parents_wtf = form.prenom_parents_wtf.data
                 name_parents = name_parents_wtf
-                valeurs_insertion_dictionnaire = {"value_intitule_genre": name_genre, "value_intitule_parents": name_parents}
+                name_telephone_wtf = form.telephone_parents_wtf.data
+                name_telephone = name_telephone_wtf
+
+                valeurs_insertion_dictionnaire = {"value_intitule_genre": name_genre, "value_intitule_parents": name_parents, "value_intitule_telephone": name_telephone}
                 print("valeurs_insertion_dictionnaire ", valeurs_insertion_dictionnaire)
 
                 strsql_insert_genre = """INSERT INTO t_parents (id_parents,Nom,Prenom) VALUES (NULL,%(value_intitule_genre)s,%(value_intitule_parents)s)"""
+                strsql_insert_telephone = """INSERT INTO t_telephone (id_telephone,NumTel) VALUES (NULL,%(value_intitule_telephone)s)"""
                 with DBconnection() as mconn_bd:
                     mconn_bd.execute(strsql_insert_genre, valeurs_insertion_dictionnaire)
+                    mconn_bd.execute(strsql_insert_telephone, valeurs_insertion_dictionnaire)
 
                 flash(f"Données insérées !!", "success")
                 print(f"Données insérées !!")

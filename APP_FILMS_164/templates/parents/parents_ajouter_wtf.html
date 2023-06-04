@@ -25,6 +25,13 @@
 							<span style="color: red;">[{{ error }}]</span>
 						{% endfor %}
 					</p>
+					<p>
+						{{ form.telephone_parents_wtf.label }}<br>
+						{{ form.telephone_parents_wtf(size=32) }}<br>
+						{% for error in form.telephone_parents_wtf.errors %}
+							<span style="color: red;">[{{ error }}]</span>
+						{% endfor %}
+					</p>
 				</div>
 				{{ form.submit(class="btn btn-primary") }}
 			</form>
