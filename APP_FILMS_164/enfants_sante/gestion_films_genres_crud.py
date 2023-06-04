@@ -70,7 +70,7 @@ def films_genres_afficher(id_film_sel):
 
     print("films_genres_afficher  ", data_genres_films_afficher)
     # Envoie la page "HTML" au serveur.
-    return render_template("films_genres/films_genres_afficher.html", data=data_genres_films_afficher)
+    return render_template("enfants_sante/films_genres_afficher.html", data=data_genres_films_afficher)
 
 
 """
@@ -157,7 +157,7 @@ def edit_enfants_sante_selected():
                                                  f"{edit_enfants_sante_selected.__name__} ; "
                                                  f"{Exception_edit_enfants_sante_selected}")
 
-    return render_template("films_genres/films_genres_modifier_tags_dropbox.html",
+    return render_template("enfants_sante/films_genres_modifier_tags_dropbox.html",
                            data_genres=data_genres_all,
                            data_film_selected=data_genre_film_selected,
                            data_genres_attribues=data_genres_films_attribues,

@@ -12,7 +12,7 @@ from wtforms.validators import Regexp
 
 class FormWTFAjouterGenres(FlaskForm):
     """
-        Dans le formulaire "genres_ajouter_wtf.html" on impose que le champ soit rempli.
+        Dans le formulaire "factures_ajouter_wtf.html" on impose que le champ soit rempli.
         Définition d'un "bouton" submit avec un libellé personnalisé.
     """
     nom_genre_regexp = "^([A-Z]|[a-zÀ-ÖØ-öø-ÿ])[A-Za-zÀ-ÖØ-öø-ÿ]*['\- ]?[A-Za-zÀ-ÖØ-öø-ÿ]+$"
@@ -35,7 +35,7 @@ class FormWTFAjouterGenres(FlaskForm):
 
 class FormWTFUpdateGenre(FlaskForm):
     """
-        Dans le formulaire "genre_update_wtf.html" on impose que le champ soit rempli.
+        Dans le formulaire "factures_update_wtf.html" on impose que le champ soit rempli.
         Définition d'un "bouton" submit avec un libellé personnalisé.
     """
     nom_genre_update_regexp = "^([A-Z]|[a-zÀ-ÖØ-öø-ÿ])[A-Za-zÀ-ÖØ-öø-ÿ]*['\- ]?[A-Za-zÀ-ÖØ-öø-ÿ]+$"
@@ -62,7 +62,7 @@ class FormWTFUpdateGenre(FlaskForm):
 
 class FormWTFDeleteGenre(FlaskForm):
     """
-        Dans le formulaire "genre_delete_wtf.html"
+        Dans le formulaire "factures_delete_wtf.html"
 
         nom_genre_delete_wtf : Champ qui reçoit la valeur du genre, lecture seule. (readonly=true)
         submit_btn_del : Bouton d'effacement "DEFINITIF".

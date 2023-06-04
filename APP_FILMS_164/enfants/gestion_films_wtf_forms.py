@@ -13,7 +13,7 @@ from wtforms.widgets import TextArea
 
 class FormWTFAddFilm(FlaskForm):
     """
-        Dans le formulaire "genres_ajouter_wtf.html" on impose que le champ soit rempli.
+        Dans le formulaire "factures_ajouter_wtf.html" on impose que le champ soit rempli.
         Définition d'un "bouton" submit avec un libellé personnalisé.
     """
     nom_film_regexp = ""
@@ -37,7 +37,7 @@ class FormWTFAddFilm(FlaskForm):
 
 class FormWTFUpdateFilm(FlaskForm):
     """
-        Dans le formulaire "film_update_wtf.html" on impose que le champ soit rempli.
+        Dans le formulaire "enfants_update_wtf.html" on impose que le champ soit rempli.
         Définition d'un "bouton" submit avec un libellé personnalisé.
     """
 
@@ -68,7 +68,7 @@ class FormWTFUpdateFilm(FlaskForm):
 
 class FormWTFDeleteFilm(FlaskForm):
     """
-        Dans le formulaire "film_delete_wtf.html"
+        Dans le formulaire "enfants_delete_wtf.html"
 
         nom_film_delete_wtf : Champ qui reçoit la valeur du film, lecture seule. (readonly=true)
         submit_btn_del : Bouton d'effacement "DEFINITIF".

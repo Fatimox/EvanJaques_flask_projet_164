@@ -13,7 +13,7 @@ from APP_FILMS_164.database.database_tools import DBconnection
 from APP_FILMS_164.erreurs.exceptions import *
 from APP_FILMS_164.enfants.gestion_films_wtf_forms import FormWTFUpdateFilm, FormWTFAddFilm, FormWTFDeleteFilm
 
-"""Ajouter un film grâce au formulaire "film_add_wtf.html"
+"""Ajouter un film grâce au formulaire "enfants_add_wtf.html"
 Auteur : OM 2022.04.11
 Définition d'une "route" /film_add
 
@@ -56,7 +56,7 @@ def film_add_wtf():
                                             f"{film_add_wtf.__name__} ; "
                                             f"{Exception_genres_ajouter_wtf}")
 
-    return render_template("enfants/film_add_wtf.html", form_add_film=form_add_film)
+    return render_template("enfants/enfants_add_wtf.html", form_add_film=form_add_film)
 
 
 """Editer(update) un film qui a été sélectionné dans le formulaire "films_genres_afficher.html"
@@ -67,7 +67,7 @@ Test : exemple: cliquer sur le menu "Films/Genres" puis cliquer sur le bouton "E
 
 Paramètres : sans
 
-But : Editer(update) un genre qui a été sélectionné dans le formulaire "genres_afficher.html"
+But : Editer(update) un genre qui a été sélectionné dans le formulaire "factures_afficher.html"
 
 Remarque :  Dans le champ "nom_enfants_wtf" du formulaire "enfants/films_update_wtf.html",
             le contrôle de la saisie s'effectue ici en Python.
@@ -85,7 +85,7 @@ def film_update_wtf():
     try:
         print(" on submit ", form_update_film.validate_on_submit())
         if form_update_film.validate_on_submit():
-            # Récupèrer la valeur du champ depuis "genre_update_wtf.html" après avoir cliqué sur "SUBMIT".
+            # Récupèrer la valeur du champ depuis "factures_update_wtf.html" après avoir cliqué sur "SUBMIT".
             nom_film_update = form_update_film.nom_enfants_wtf.data
             duree_film_update = form_update_film.prenom_enfants_wtf.data
             datenaissance_film_update = form_update_film.datenaissance_enfants_wtf.data
@@ -121,7 +121,7 @@ def film_update_wtf():
             print("data_film ", data_film, " type ", type(data_film), " genre ",
                   data_film["Nom"])
 
-            # Afficher la valeur sélectionnée dans le champ du formulaire "film_update_wtf.html"
+            # Afficher la valeur sélectionnée dans le champ du formulaire "enfants_update_wtf.html"
             form_update_film.nom_enfants_wtf.data = data_film["Nom"]
             form_update_film.prenom_enfants_wtf.data = data_film["Prenom"]
             # Debug simple pour contrôler la valeur dans la console "run" de PyCharm
@@ -133,7 +133,7 @@ def film_update_wtf():
                                      f"{film_update_wtf.__name__} ; "
                                      f"{Exception_film_update_wtf}")
 
-    return render_template("enfants/film_update_wtf.html", form_update_film=form_update_film)
+    return render_template("enfants/enfants_update_wtf.html", form_update_film=form_update_film)
 
 
 """Effacer(delete) un film qui a été sélectionné dans le formulaire "films_genres_afficher.html"
@@ -144,7 +144,7 @@ Test : ex. cliquer sur le menu "film" puis cliquer sur le bouton "DELETE" d'un "
     
 Paramètres : sans
 
-Remarque :  Dans le champ "nom_film_delete_wtf" du formulaire "enfants/film_delete_wtf.html"
+Remarque :  Dans le champ "nom_film_delete_wtf" du formulaire "enfants/enfants_delete_wtf.html"
             On doit simplement cliquer sur "DELETE"
 """
 
@@ -166,7 +166,7 @@ def film_delete_wtf():
 
         if form_delete_film.submit_btn_conf_del_film.data:
             # Récupère les données afin d'afficher à nouveau
-            # le formulaire "enfants/film_delete_wtf.html" lorsque le bouton "Etes-vous sur d'effacer ?" est cliqué.
+            # le formulaire "enfants/enfants_delete_wtf.html" lorsque le bouton "Etes-vous sur d'effacer ?" est cliqué.
             data_film_delete = session['data_film_delete']
             print("data_film_delete ", data_film_delete)
 
@@ -208,10 +208,10 @@ def film_delete_wtf():
                 print("data_film_delete...", data_film_delete)
 
                 # Nécessaire pour mémoriser les données afin d'afficher à nouveau
-                # le formulaire "enfants/film_delete_wtf.html" lorsque le bouton "Etes-vous sur d'effacer ?" est cliqué.
+                # le formulaire "enfants/enfants_delete_wtf.html" lorsque le bouton "Etes-vous sur d'effacer ?" est cliqué.
                 session['data_film_delete'] = data_film_delete
 
-            # Le bouton pour l'action "DELETE" dans le form. "film_delete_wtf.html" est caché.
+            # Le bouton pour l'action "DELETE" dans le form. "enfants_delete_wtf.html" est caché.
             btn_submit_del = False
 
     except Exception as Exception_film_delete_wtf:
@@ -219,7 +219,7 @@ def film_delete_wtf():
                                      f"{film_delete_wtf.__name__} ; "
                                      f"{Exception_film_delete_wtf}")
 
-    return render_template("enfants/film_delete_wtf.html",
+    return render_template("enfants/enfants_delete_wtf.html",
                            form_delete_film=form_delete_film,
                            btn_submit_del=btn_submit_del,
                            data_film_del=data_film_delete
