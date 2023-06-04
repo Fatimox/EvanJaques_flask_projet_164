@@ -1,5 +1,5 @@
 """Gestion des "routes" FLASK et des données pour les parents.
-Fichier : gestion_genres_crud.py
+Fichier : gestion_parents_crud.py
 Auteur : OM 2021.03.16
 """
 from pathlib import Path
@@ -12,9 +12,9 @@ from flask import url_for
 from APP_FILMS_164 import app
 from APP_FILMS_164.database.database_tools import DBconnection
 from APP_FILMS_164.erreurs.exceptions import *
-from APP_FILMS_164.parents.gestion_genres_wtf_forms import FormWTFAjouterGenres
-from APP_FILMS_164.parents.gestion_genres_wtf_forms import FormWTFDeleteGenre
-from APP_FILMS_164.parents.gestion_genres_wtf_forms import FormWTFUpdateGenre
+from APP_FILMS_164.parents.gestion_parents_wtf_forms import FormWTFAjouterGenres
+from APP_FILMS_164.parents.gestion_parents_wtf_forms import FormWTFDeleteGenre
+from APP_FILMS_164.parents.gestion_parents_wtf_forms import FormWTFUpdateGenre
 
 """
     Auteur : OM 2021.03.16
@@ -83,7 +83,7 @@ def genres_afficher(order_by, id_genre_sel):
                                           f"{Exception_genres_afficher}")
 
     # Envoie la page "HTML" au serveur.
-    return render_template("parents/factures_afficher.html", data=data_genres)
+    return render_template("parents/parents_afficher.html", data=data_genres)
 
 
 """
@@ -96,7 +96,7 @@ def genres_afficher(order_by, id_genre_sel):
     
     But : Ajouter un genre pour un film
     
-    Remarque :  Dans le champ "name_genre_html" du formulaire "parents/genres_ajouter.html",
+    Remarque :  Dans le champ "name_genre_html" du formulaire "parents/parents_ajouter.html",
                 le contrôle de la saisie s'effectue ici en Python.
                 On transforme la saisie en minuscules.
                 On ne doit pas accepter des valeurs vides, des valeurs avec des chiffres,
@@ -135,7 +135,7 @@ def genres_ajouter_wtf():
                                             f"{genres_ajouter_wtf.__name__} ; "
                                             f"{Exception_genres_ajouter_wtf}")
 
-    return render_template("parents/factures_ajouter_wtf.html", form=form)
+    return render_template("parents/parents_ajouter_wtf.html", form=form)
 
 
 """
@@ -148,7 +148,7 @@ def genres_ajouter_wtf():
     
     But : Editer(update) un genre qui a été sélectionné dans le formulaire "factures_afficher.html"
     
-    Remarque :  Dans le champ "nom_genre_update_wtf" du formulaire "parents/factures_update_wtf.html",
+    Remarque :  Dans le champ "nom_genre_update_wtf" du formulaire "parents/parents_update_wtf.html",
                 le contrôle de la saisie s'effectue ici en Python.
                 On transforme la saisie en minuscules.
                 On ne doit pas accepter des valeurs vides, des valeurs avec des chiffres,
@@ -168,7 +168,7 @@ def genre_update_wtf():
     try:
         print(" on submit ", form_update.validate_on_submit())
         if form_update.validate_on_submit():
-            # Récupèrer la valeur du champ depuis "factures_update_wtf.html" après avoir cliqué sur "SUBMIT".
+            # Récupèrer la valeur du champ depuis "parents_update_wtf.html" après avoir cliqué sur "SUBMIT".
             # Puis la convertir en lettres minuscules.
             name_genre_update = form_update.nom_genre_update_wtf.data
             name_genre_update = name_genre_update
@@ -203,7 +203,7 @@ def genre_update_wtf():
             print("Nom ", data_nom_genre, " type ", type(data_nom_genre), " genre ",
                   data_nom_genre["Prenom"])
 
-            # Afficher la valeur sélectionnée dans les champs du formulaire "factures_update_wtf.html"
+            # Afficher la valeur sélectionnée dans les champs du formulaire "parents_update_wtf.html"
             form_update.nom_genre_update_wtf.data = data_nom_genre["Prenom"]
             form_update.date_genre_wtf_essai.data = data_nom_genre["Nom"]
 
@@ -212,7 +212,7 @@ def genre_update_wtf():
                                       f"{genre_update_wtf.__name__} ; "
                                       f"{Exception_genre_update_wtf}")
 
-    return render_template("parents/factures_update_wtf.html", form_update=form_update)
+    return render_template("parents/parents_update_wtf.html", form_update=form_update)
 
 
 """
@@ -319,7 +319,7 @@ def genre_delete_wtf():
                                       f"{genre_delete_wtf.__name__} ; "
                                       f"{Exception_genre_delete_wtf}")
 
-    return render_template("parents/factures_delete_wtf.html",
+    return render_template("parents/parents_delete_wtf.html",
                            form_delete=form_delete,
                            btn_submit_del=btn_submit_del,
                            data_films_associes=data_films_attribue_genre_delete)

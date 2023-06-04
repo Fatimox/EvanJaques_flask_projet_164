@@ -1,5 +1,5 @@
 """Gestion des "routes" FLASK et des données pour les enfants.
-Fichier : gestion_films_crud.py
+Fichier : gestion_enfants_crud.py
 Auteur : OM 2022.04.11
 """
 from pathlib import Path
@@ -11,7 +11,7 @@ from flask import url_for
 
 from APP_FILMS_164.database.database_tools import DBconnection
 from APP_FILMS_164.erreurs.exceptions import *
-from APP_FILMS_164.enfants.gestion_films_wtf_forms import FormWTFUpdateFilm, FormWTFAddFilm, FormWTFDeleteFilm
+from APP_FILMS_164.enfants.gestion_enfants_wtf_forms import FormWTFUpdateFilm, FormWTFAddFilm, FormWTFDeleteFilm
 
 """Ajouter un film grâce au formulaire "enfants_add_wtf.html"
 Auteur : OM 2022.04.11
@@ -85,7 +85,7 @@ def film_update_wtf():
     try:
         print(" on submit ", form_update_film.validate_on_submit())
         if form_update_film.validate_on_submit():
-            # Récupèrer la valeur du champ depuis "factures_update_wtf.html" après avoir cliqué sur "SUBMIT".
+            # Récupèrer la valeur du champ depuis "parents_update_wtf.html" après avoir cliqué sur "SUBMIT".
             nom_film_update = form_update_film.nom_enfants_wtf.data
             duree_film_update = form_update_film.prenom_enfants_wtf.data
             datenaissance_film_update = form_update_film.datenaissance_enfants_wtf.data

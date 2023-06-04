@@ -1,5 +1,5 @@
 """
-    Fichier : gestion_genres_wtf_forms.py
+    Fichier : gestion_parents_wtf_forms.py
     Auteur : OM 2021.03.22
     Gestion des formulaires avec WTF
 """
@@ -35,7 +35,7 @@ class FormWTFAjouterGenres(FlaskForm):
 
 class FormWTFUpdateGenre(FlaskForm):
     """
-        Dans le formulaire "factures_update_wtf.html" on impose que le champ soit rempli.
+        Dans le formulaire "parents_update_wtf.html" on impose que le champ soit rempli.
         Définition d'un "bouton" submit avec un libellé personnalisé.
     """
     nom_genre_update_regexp = "^([A-Z]|[a-zÀ-ÖØ-öø-ÿ])[A-Za-zÀ-ÖØ-öø-ÿ]*['\- ]?[A-Za-zÀ-ÖØ-öø-ÿ]+$"
