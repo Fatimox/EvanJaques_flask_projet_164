@@ -1,5 +1,5 @@
 """
-    Fichier : gestion_films_genres_crud.py
+    Fichier : gestion_enfants_sante_crud.py
     Auteur : OM 2021.05.01
     Gestions des "routes" FLASK et des données pour l'association entre les enfants et les parents.
 """
@@ -33,7 +33,7 @@ def films_genres_afficher(id_film_sel):
         try:
             with DBconnection() as mc_afficher:
                 strsql_genres_films_afficher_data = """SELECT id_enfants, Nom, Prenom, DateNaissance,
-                                                            GROUP_CONCAT(Allergie) as GenresFilms FROM t_enfants_sante
+                                                            GROUP_CONCAT(Allergie) as EnfantsSante FROM t_enfants_sante
                                                             RIGHT JOIN t_enfants ON t_enfants.id_enfants = t_enfants_sante.fk_enfants
                                                             LEFT JOIN t_sante ON t_sante.id_sante = t_enfants_sante.fk_sante
                                                             GROUP BY id_enfants"""
@@ -70,14 +70,14 @@ def films_genres_afficher(id_film_sel):
 
     print("films_genres_afficher  ", data_genres_films_afficher)
     # Envoie la page "HTML" au serveur.
-    return render_template("enfants_sante/films_genres_afficher.html", data=data_genres_films_afficher)
+    return render_template("enfants_sante/enfants_sante_afficher.html", data=data_genres_films_afficher)
 
 
 """
     nom: edit_enfants_sante_selected
     On obtient un objet "objet_dumpbd"
 
-    Récupère la liste de tous les parents du film sélectionné par le bouton "MODIFIER" de "films_genres_afficher.html"
+    Récupère la liste de tous les parents du film sélectionné par le bouton "MODIFIER" de "enfants_sante_afficher.html"
     
     Dans une liste déroulante particulière (tags-selector-tagselect), on voit :
     1) Tous les parents contenus dans la "t_parents".
@@ -99,9 +99,9 @@ def edit_enfants_sante_selected():
             data_genres_all = mc_afficher.fetchall()
             print("dans edit_enfants_sante_selected ---> data_genres_all", data_genres_all)
 
-            # Récupère la valeur de "id_enfants" du formulaire html "films_genres_afficher.html"
+            # Récupère la valeur de "id_enfants" du formulaire html "enfants_sante_afficher.html"
             # l'utilisateur clique sur le bouton "Modifier" et on récupère la valeur de "id_enfants"
-            # grâce à la variable "id_film_genres_edit_html" dans le fichier "films_genres_afficher.html"
+            # grâce à la variable "id_film_genres_edit_html" dans le fichier "enfants_sante_afficher.html"
             # href="{{ url_for('edit_enfants_sante_selected', id_film_genres_edit_html=row.id_enfants) }}"
             id_film_genres_edit = request.values['id_film_genres_edit_html']
 
@@ -157,7 +157,7 @@ def edit_enfants_sante_selected():
                                                  f"{edit_enfants_sante_selected.__name__} ; "
                                                  f"{Exception_edit_enfants_sante_selected}")
 
-    return render_template("enfants_sante/films_genres_modifier_tags_dropbox.html",
+    return render_template("enfants_sante/enfants_sante_modifier_tags_dropbox.html",
                            data_genres=data_genres_all,
                            data_film_selected=data_genre_film_selected,
                            data_genres_attribues=data_genres_films_attribues,
@@ -167,7 +167,7 @@ def edit_enfants_sante_selected():
 """
     nom: update_genre_film_selected
 
-    Récupère la liste de tous les parents du film sélectionné par le bouton "MODIFIER" de "films_genres_afficher.html"
+    Récupère la liste de tous les parents du film sélectionné par le bouton "MODIFIER" de "enfants_sante_afficher.html"
     
     Dans une liste déroulante particulière (tags-selector-tagselect), on voit :
     1) Tous les parents contenus dans la "t_parents".
@@ -266,7 +266,7 @@ def update_genre_film_selected():
 """
     nom: genres_films_afficher_data
 
-    Récupère la liste de tous les parents du film sélectionné par le bouton "MODIFIER" de "films_genres_afficher.html"
+    Récupère la liste de tous les parents du film sélectionné par le bouton "MODIFIER" de "enfants_sante_afficher.html"
     Nécessaire pour afficher tous les "TAGS" des parents, ainsi l'utilisateur voit les parents à disposition
 
     On signale les erreurs importantes
@@ -277,7 +277,7 @@ def genres_films_afficher_data(valeur_id_film_selected_dict):
     print("valeur_id_film_selected_dict...", valeur_id_film_selected_dict)
     try:
 
-        strsql_film_selected = """SELECT id_enfants, Nom, Prenom, DateNaissance, GROUP_CONCAT(id_sante) as GenresFilms FROM t_enfants_sante
+        strsql_film_selected = """SELECT id_enfants, Nom, Prenom, DateNaissance, GROUP_CONCAT(id_sante) as EnfantsSante FROM t_enfants_sante
                                         INNER JOIN t_enfants ON t_enfants.id_enfants = t_enfants_sante.fk_enfants
                                         INNER JOIN t_sante ON t_sante.id_sante = t_enfants_sante.fk_sante
                                         WHERE id_enfants = %(value_id_enfants_selected)s"""

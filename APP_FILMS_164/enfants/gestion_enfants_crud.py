@@ -59,7 +59,7 @@ def film_add_wtf():
     return render_template("enfants/enfants_add_wtf.html", form_add_film=form_add_film)
 
 
-"""Editer(update) un film qui a été sélectionné dans le formulaire "films_genres_afficher.html"
+"""Editer(update) un film qui a été sélectionné dans le formulaire "parents_telephone_afficher.html"
 Auteur : OM 2022.04.11
 Définition d'une "route" /film_update
 
@@ -136,7 +136,7 @@ def film_update_wtf():
     return render_template("enfants/enfants_update_wtf.html", form_update_film=form_update_film)
 
 
-"""Effacer(delete) un film qui a été sélectionné dans le formulaire "films_genres_afficher.html"
+"""Effacer(delete) un film qui a été sélectionné dans le formulaire "parents_telephone_afficher.html"
 Auteur : OM 2022.04.11
 Définition d'une "route" /film_delete
     
