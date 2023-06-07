@@ -48,10 +48,10 @@
 					  </th>
 					<tr>
 						<td class="align-middle">
-							<a class="btn btn-warning" href="{{ url_for('edit_enfants_sante_selected', id_film_genres_edit_html=row.id_enfants) }}" role="button">Modifier</a>
+							<a class="btn btn-warning" href="{{ url_for('edit_genre_film_selected', id_film_genres_edit_html=row.id_enfants) }}" role="button">Modifier</a>
 						</td>
 						<td class="align-middle" colspan="5">
-							{{ row.EnfantsSante|default("PAS D'ALLERGIES", True) }}
+							{{ row.GenresFilms|default("PAS D'ALLERGIES", True) }}
 						</td>
 					</tr>
 				</tr>

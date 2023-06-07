@@ -16,7 +16,6 @@ CREATE DATABASE IF NOT EXISTS evan_jaques_info1a_164;
 
 USE evan_jaques_info1a_164;
 -- --------------------------------------------------------
--- --------------------------------------------------------
 -- Hôte:                         127.0.0.1
 -- Version du serveur:           8.0.30 - MySQL Community Server - GPL
 -- SE du serveur:                Win64
@@ -61,11 +60,11 @@ CREATE TABLE IF NOT EXISTS `t_cours` (
 -- Listage de la structure de table evan_jaques_info1a_164. t_enfants
 DROP TABLE IF EXISTS `t_enfants`;
 CREATE TABLE IF NOT EXISTS `t_enfants` (
-  `id_enfant` int NOT NULL AUTO_INCREMENT,
+  `id_enfants` int NOT NULL AUTO_INCREMENT,
   `Nom` varchar(50) DEFAULT NULL,
   `Prenom` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `DateNaissance` date DEFAULT NULL,
-  PRIMARY KEY (`id_enfant`)
+  PRIMARY KEY (`id_enfants`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Listage des données de la table evan_jaques_info1a_164.t_enfants : ~0 rows (environ)
@@ -80,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `t_enfants_cours` (
   KEY `FK_t_enfants_cours_t_enfants` (`fk_enfants`),
   KEY `FK_t_enfants_cours_t_cours` (`fk_cours`),
   CONSTRAINT `FK_t_enfants_cours_t_cours` FOREIGN KEY (`fk_cours`) REFERENCES `t_cours` (`id_cours`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `FK_t_enfants_cours_t_enfants` FOREIGN KEY (`fk_enfants`) REFERENCES `t_enfants` (`id_enfant`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  CONSTRAINT `FK_t_enfants_cours_t_enfants` FOREIGN KEY (`fk_enfants`) REFERENCES `t_enfants` (`id_enfants`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Listage des données de la table evan_jaques_info1a_164.t_enfants_cours : ~0 rows (environ)
@@ -94,7 +93,7 @@ CREATE TABLE IF NOT EXISTS `t_enfants_sante` (
   PRIMARY KEY (`id_enfants_sante`),
   KEY `FK_t_enfants_sante_t_enfants` (`fk_enfants`),
   KEY `FK_t_enfants_sante_t_sante` (`fk_sante`),
-  CONSTRAINT `FK_t_enfants_sante_t_enfants` FOREIGN KEY (`fk_enfants`) REFERENCES `t_enfants` (`id_enfant`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `FK_t_enfants_sante_t_enfants` FOREIGN KEY (`fk_enfants`) REFERENCES `t_enfants` (`id_enfants`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_t_enfants_sante_t_sante` FOREIGN KEY (`fk_sante`) REFERENCES `t_sante` (`id_sante`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 

@@ -33,7 +33,7 @@ def films_genres_afficher(id_film_sel):
         try:
             with DBconnection() as mc_afficher:
                 strsql_genres_films_afficher_data = """SELECT id_enfants, Nom, Prenom, DateNaissance,
-                                                            GROUP_CONCAT(Allergie) as EnfantsSante FROM t_enfants_sante
+                                                            GROUP_CONCAT(Allergie) as GenresFilms FROM t_enfants_sante
                                                             RIGHT JOIN t_enfants ON t_enfants.id_enfants = t_enfants_sante.fk_enfants
                                                             LEFT JOIN t_sante ON t_sante.id_sante = t_enfants_sante.fk_sante
                                                             GROUP BY id_enfants"""
@@ -74,7 +74,7 @@ def films_genres_afficher(id_film_sel):
 
 
 """
-    nom: edit_enfants_sante_selected
+    nom: edit_genre_film_selected
     On obtient un objet "objet_dumpbd"
 
     Récupère la liste de tous les parents du film sélectionné par le bouton "MODIFIER" de "enfants_sante_afficher.html"
@@ -89,20 +89,20 @@ def films_genres_afficher(id_film_sel):
 """
 
 
-@app.route("/edit_enfants_sante_selected", methods=['GET', 'POST'])
-def edit_enfants_sante_selected():
+@app.route("/edit_genre_film_selected", methods=['GET', 'POST'])
+def edit_genre_film_selected():
     if request.method == "GET":
         try:
             with DBconnection() as mc_afficher:
                 strsql_genres_afficher = """SELECT id_sante, Allergie FROM t_sante ORDER BY id_sante ASC"""
                 mc_afficher.execute(strsql_genres_afficher)
             data_genres_all = mc_afficher.fetchall()
-            print("dans edit_enfants_sante_selected ---> data_genres_all", data_genres_all)
+            print("dans edit_genre_film_selected ---> data_genres_all", data_genres_all)
 
             # Récupère la valeur de "id_enfants" du formulaire html "enfants_sante_afficher.html"
             # l'utilisateur clique sur le bouton "Modifier" et on récupère la valeur de "id_enfants"
             # grâce à la variable "id_film_genres_edit_html" dans le fichier "enfants_sante_afficher.html"
-            # href="{{ url_for('edit_enfants_sante_selected', id_film_genres_edit_html=row.id_enfants) }}"
+            # href="{{ url_for('edit_genre_film_selected', id_film_genres_edit_html=row.id_enfants) }}"
             id_film_genres_edit = request.values['id_film_genres_edit_html']
 
             # Mémorise l'id du film dans une variable de session
@@ -154,7 +154,7 @@ def edit_enfants_sante_selected():
 
         except Exception as Exception_edit_enfants_sante_selected:
             raise ExceptionEditGenreFilmSelected(f"fichier : {Path(__file__).name}  ;  "
-                                                 f"{edit_enfants_sante_selected.__name__} ; "
+                                                 f"{edit_genre_film_selected.__name__} ; "
                                                  f"{Exception_edit_enfants_sante_selected}")
 
     return render_template("enfants_sante/enfants_sante_modifier_tags_dropbox.html",
@@ -277,7 +277,7 @@ def genres_films_afficher_data(valeur_id_film_selected_dict):
     print("valeur_id_film_selected_dict...", valeur_id_film_selected_dict)
     try:
 
-        strsql_film_selected = """SELECT id_enfants, Nom, Prenom, DateNaissance, GROUP_CONCAT(id_sante) as EnfantsSante FROM t_enfants_sante
+        strsql_film_selected = """SELECT id_enfants, Nom, Prenom, DateNaissance, GROUP_CONCAT(id_sante) as GenresFilms FROM t_enfants_sante
                                         INNER JOIN t_enfants ON t_enfants.id_enfants = t_enfants_sante.fk_enfants
                                         INNER JOIN t_sante ON t_sante.id_sante = t_enfants_sante.fk_sante
                                         WHERE id_enfants = %(value_id_enfants_selected)s"""
