@@ -29,14 +29,14 @@ Remarque :  Dans le champ "nom_enfants_wtf" du formulaire "enfants/films_update_
 
 
 @app.route("/film_add", methods=['GET', 'POST'])
-def film_add_wtf():
+def enfant_add_wtf():
     # Objet formulaire pour AJOUTER un film
     form_add_film = FormWTFAddFilm()
     if request.method == "POST":
         try:
             if form_add_film.validate_on_submit():
-                nom_film_add = form_add_film.nom_film_add_wtf.data
-                prenom_film_add = form_add_film.prenom_film_add_wtf.data
+                nom_film_add = form_add_film.nom_enfant_add_wtf.data
+                prenom_film_add = form_add_film.prenom_enfant_add_wtf.data
 
                 valeurs_insertion_dictionnaire = {"value_nom_enfants": nom_film_add, "value_prenom_film": prenom_film_add}
                 print("valeurs_insertion_dictionnaire ", valeurs_insertion_dictionnaire)
@@ -49,11 +49,11 @@ def film_add_wtf():
                 print(f"Données insérées !!")
 
                 # Pour afficher et constater l'insertion du nouveau film (id_film_sel=0 => afficher tous les enfants)
-                return redirect(url_for('films_genres_afficher', id_film_sel=0))
+                return redirect(url_for('enfants_sante_afficher', id_film_sel=0))
 
         except Exception as Exception_genres_ajouter_wtf:
             raise ExceptionGenresAjouterWtf(f"fichier : {Path(__file__).name}  ;  "
-                                            f"{film_add_wtf.__name__} ; "
+                                            f"{enfant_add_wtf.__name__} ; "
                                             f"{Exception_genres_ajouter_wtf}")
 
     return render_template("enfants/enfants_add_wtf.html", form_add_film=form_add_film)
@@ -76,7 +76,7 @@ Remarque :  Dans le champ "nom_enfants_wtf" du formulaire "enfants/films_update_
 
 
 @app.route("/film_update", methods=['GET', 'POST'])
-def film_update_wtf():
+def enfant_update_wtf():
     # L'utilisateur vient de cliquer sur le bouton "EDIT". Récupère la valeur de "id_enfants"
     id_film_update = request.values['id_film_btn_edit_html']
 
@@ -109,7 +109,7 @@ def film_update_wtf():
 
             # afficher et constater que la donnée est mise à jour.
             # Afficher seulement le film modifié, "ASC" et l'"id_film_update"
-            return redirect(url_for('films_genres_afficher', id_film_sel=id_film_update))
+            return redirect(url_for('enfants_sante_afficher', id_film_sel=id_film_update))
         elif request.method == "GET":
             # Opération sur la BD pour récupérer "id_enfants" et "intitule_genre" de la "t_parents"
             str_sql_id_film = "SELECT * FROM t_enfants WHERE id_enfants = %(value_id_enfants)s"
@@ -128,10 +128,10 @@ def film_update_wtf():
             print(f" duree film  ", data_film["Prenom"], "  type ", type(data_film["Prenom"]))
             form_update_film.datenaissance_enfants_wtf.data = data_film["DateNaissance"]
 
-    except Exception as Exception_film_update_wtf:
+    except Exception as Exception_enfant_update_wtf:
         raise ExceptionFilmUpdateWtf(f"fichier : {Path(__file__).name}  ;  "
-                                     f"{film_update_wtf.__name__} ; "
-                                     f"{Exception_film_update_wtf}")
+                                     f"{enfant_update_wtf.__name__} ; "
+                                     f"{Exception_enfant_update_wtf}")
 
     return render_template("enfants/enfants_update_wtf.html", form_update_film=form_update_film)
 
@@ -144,13 +144,13 @@ Test : ex. cliquer sur le menu "film" puis cliquer sur le bouton "DELETE" d'un "
     
 Paramètres : sans
 
-Remarque :  Dans le champ "nom_film_delete_wtf" du formulaire "enfants/enfants_delete_wtf.html"
+Remarque :  Dans le champ "nom_enfant_delete_wtf" du formulaire "enfants/enfants_delete_wtf.html"
             On doit simplement cliquer sur "DELETE"
 """
 
 
 @app.route("/film_delete", methods=['GET', 'POST'])
-def film_delete_wtf():
+def enfant_delete_wtf():
     # Pour afficher ou cacher les boutons "EFFACER"
     data_film_delete = None
     btn_submit_del = None
@@ -162,7 +162,7 @@ def film_delete_wtf():
     try:
         # Si on clique sur "ANNULER", afficher tous les enfants.
         if form_delete_film.submit_btn_annuler.data:
-            return redirect(url_for("films_genres_afficher", id_film_sel=0))
+            return redirect(url_for("enfants_sante_afficher", id_film_sel=0))
 
         if form_delete_film.submit_btn_conf_del_film.data:
             # Récupère les données afin d'afficher à nouveau
@@ -194,7 +194,7 @@ def film_delete_wtf():
             print(f"Film définitivement effacé !!")
 
             # afficher les données
-            return redirect(url_for('films_genres_afficher', id_film_sel=0))
+            return redirect(url_for('enfants_sante_afficher', id_film_sel=0))
         if request.method == "GET":
             valeur_select_dictionnaire = {"value_id_enfants": id_film_delete}
             print(id_film_delete, type(id_film_delete))
@@ -214,10 +214,10 @@ def film_delete_wtf():
             # Le bouton pour l'action "DELETE" dans le form. "enfants_delete_wtf.html" est caché.
             btn_submit_del = False
 
-    except Exception as Exception_film_delete_wtf:
+    except Exception as Exception_enfant_delete_wtf:
         raise ExceptionFilmDeleteWtf(f"fichier : {Path(__file__).name}  ;  "
-                                     f"{film_delete_wtf.__name__} ; "
-                                     f"{Exception_film_delete_wtf}")
+                                     f"{enfant_delete_wtf.__name__} ; "
+                                     f"{Exception_enfant_delete_wtf}")
 
     return render_template("enfants/enfants_delete_wtf.html",
                            form_delete_film=form_delete_film,

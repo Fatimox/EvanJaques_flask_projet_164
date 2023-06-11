@@ -17,14 +17,14 @@ class FormWTFAddFilm(FlaskForm):
         Définition d'un "bouton" submit avec un libellé personnalisé.
     """
     nom_film_regexp = ""
-    nom_film_add_wtf = StringField("Ajouter le nom de l'enfant ", validators=[Length(min=2, max=2000, message="min 2 max 20"),
+    nom_enfant_add_wtf = StringField("Ajouter le nom de l'enfant ", validators=[Length(min=2, max=2000, message="min 2 max 20"),
                                                                Regexp(nom_film_regexp,
                                                                       message="Pas de chiffres, de caractères "
                                                                               "spéciaux, "
                                                                               "d'espace à double, de double "
                                                                               "apostrophe, de double trait union")
                                                                ])
-    prenom_film_add_wtf = StringField("Ajouter le prénom de l'enfant ", validators=[Length(min=2, max=2000, message="min 2 max 20"),
+    prenom_enfant_add_wtf = StringField("Ajouter le prénom de l'enfant ", validators=[Length(min=2, max=2000, message="min 2 max 20"),
                                                                    Regexp(nom_film_regexp,
                                                                           message="Pas de chiffres, de caractères "
                                                                                   "spéciaux, "
@@ -70,12 +70,12 @@ class FormWTFDeleteFilm(FlaskForm):
     """
         Dans le formulaire "enfants_delete_wtf.html"
 
-        nom_film_delete_wtf : Champ qui reçoit la valeur du film, lecture seule. (readonly=true)
+        nom_enfant_delete_wtf : Champ qui reçoit la valeur du film, lecture seule. (readonly=true)
         submit_btn_del : Bouton d'effacement "DEFINITIF".
         submit_btn_conf_del : Bouton de confirmation pour effacer un "film".
         submit_btn_annuler : Bouton qui permet d'afficher la table "t_enfants".
     """
-    nom_film_delete_wtf = StringField("Effacer ce film")
+    nom_enfant_delete_wtf = StringField("Effacer ce film")
     submit_btn_del_film = SubmitField("Effacer film")
     submit_btn_conf_del_film = SubmitField("Etes-vous sur d'effacer ?")
     submit_btn_annuler = SubmitField("Annuler")

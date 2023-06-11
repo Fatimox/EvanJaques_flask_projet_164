@@ -12,16 +12,16 @@
 				{{ form_add_film.hidden_tag() }}
 				<div class="form-group">
 					<p>
-						{{ form_add_film.nom_film_add_wtf.label }}<br>
-						{{ form_add_film.nom_film_add_wtf(size=32) }}<br>
-						{% for error in form_add_film.nom_film_add_wtf.errors %}
+						{{ form_add_film.nom_enfant_add_wtf.label }}<br>
+						{{ form_add_film.nom_enfant_add_wtf(size=32) }}<br>
+						{% for error in form_add_film.nom_enfant_add_wtf.errors %}
 							<span style="color: red;">[{{ error }}]</span>
 						{% endfor %}
 					</p>
 					<p>
-						{{ form_add_film.prenom_film_add_wtf.label }}<br>
-						{{ form_add_film.prenom_film_add_wtf(size=32) }}<br>
-						{% for error in form_add_film.prenom_film_add_wtf.errors %}
+						{{ form_add_film.prenom_enfant_add_wtf.label }}<br>
+						{{ form_add_film.prenom_enfant_add_wtf(size=32) }}<br>
+						{% for error in form_add_film.prenom_enfant_add_wtf.errors %}
 							<span style="color: red;">[{{ error }}]</span>
 						{% endfor %}
 					</p>

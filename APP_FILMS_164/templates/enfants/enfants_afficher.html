@@ -41,14 +41,14 @@
 						<a class="btn btn-primary" href="{{ url_for('avertissement_sympa_pour_geeks') }}" role="button">Ajouter</a>
 					  </th>
 					  <th class="align-middle">
-						<a class="btn btn-warning" href="{{ url_for('film_update_wtf', id_film_btn_edit_html=row.id_enfants) }}" role="button">Edit</a>
+						<a class="btn btn-warning" href="{{ url_for('enfant_update_wtf', id_film_btn_edit_html=row.id_enfants) }}" role="button">Edit</a>
 					  </th>
 					  <th class="align-middle">
 						<a class="btn btn-danger" href="{{ url_for('avertissement_sympa_pour_geeks') }}" role="button">Delete</a>
 					  </th>
 					<tr>
 						<td class="align-middle">
-							<a class="btn btn-warning" href="{{ url_for(' ', id_film_genres_edit_html=row.id_enfants) }}" role="button">Modifier</a>
+							<a class="btn btn-warning" href="{{ url_for(' ', id_enfants_sante_edit_html=row.id_enfants) }}" role="button">Modifier</a>
 						</td>
 						<td class="align-middle" colspan="5">
 							{{ row.GenresFilms|default("PAS D'ALLERGIES", True) }}

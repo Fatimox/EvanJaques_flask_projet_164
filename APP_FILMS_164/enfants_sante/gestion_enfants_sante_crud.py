@@ -14,9 +14,9 @@ from APP_FILMS_164.database.database_tools import DBconnection
 from APP_FILMS_164.erreurs.exceptions import *
 
 """
-    Nom : films_genres_afficher
+    Nom : enfants_sante_afficher
     Auteur : OM 2021.05.01
-    Définition d'une "route" /films_genres_afficher
+    Définition d'une "route" /enfants_sante_afficher
     
     But : Afficher les enfants avec les parents associés pour chaque film.
     
@@ -26,13 +26,13 @@ from APP_FILMS_164.erreurs.exceptions import *
 """
 
 
-@app.route("/films_genres_afficher/<int:id_film_sel>", methods=['GET', 'POST'])
-def films_genres_afficher(id_film_sel):
-    print(" films_genres_afficher id_film_sel ", id_film_sel)
+@app.route("/enfants_sante_afficher/<int:id_film_sel>", methods=['GET', 'POST'])
+def enfants_sante_afficher(id_film_sel):
+    print(" enfants_sante_afficher id_film_sel ", id_film_sel)
     if request.method == "GET":
         try:
             with DBconnection() as mc_afficher:
-                strsql_genres_films_afficher_data = """SELECT id_enfants, Nom, Prenom, DateNaissance,
+                strsql_enfants_sante_afficher_data = """SELECT id_enfants, Nom, Prenom, DateNaissance,
                                                             GROUP_CONCAT(Allergie) as GenresFilms FROM t_enfants_sante
                                                             RIGHT JOIN t_enfants ON t_enfants.id_enfants = t_enfants_sante.fk_enfants
                                                             LEFT JOIN t_sante ON t_sante.id_sante = t_enfants_sante.fk_sante
@@ -41,15 +41,15 @@ def films_genres_afficher(id_film_sel):
                 if id_film_sel == 0:
                     # le paramètre 0 permet d'afficher tous les enfants
                     # Sinon le paramètre représente la valeur de l'id du film
-                    mc_afficher.execute(strsql_genres_films_afficher_data)
+                    mc_afficher.execute(strsql_enfants_sante_afficher_data)
                 else:
                     # Constitution d'un dictionnaire pour associer l'id du film sélectionné avec un nom de variable
                     valeur_id_film_selected_dictionnaire = {"value_id_enfants_selected": id_film_sel}
                     # En MySql l'instruction HAVING fonctionne comme un WHERE... mais doit être associée à un GROUP BY
                     # L'opérateur += permet de concaténer une nouvelle valeur à la valeur de gauche préalablement définie.
-                    strsql_genres_films_afficher_data += """ HAVING id_enfants= %(value_id_enfants_selected)s"""
+                    strsql_enfants_sante_afficher_data += """ HAVING id_enfants= %(value_id_enfants_selected)s"""
 
-                    mc_afficher.execute(strsql_genres_films_afficher_data, valeur_id_film_selected_dictionnaire)
+                    mc_afficher.execute(strsql_enfants_sante_afficher_data, valeur_id_film_selected_dictionnaire)
 
                 # Récupère les données de la requête.
                 data_genres_films_afficher = mc_afficher.fetchall()
@@ -64,17 +64,17 @@ def films_genres_afficher(id_film_sel):
                 else:
                     flash(f"Données enfants affichés !!", "success")
 
-        except Exception as Exception_films_genres_afficher:
-            raise ExceptionFilmsGenresAfficher(f"fichier : {Path(__file__).name}  ;  {films_genres_afficher.__name__} ;"
-                                               f"{Exception_films_genres_afficher}")
+        except Exception as Exception_enfants_sante_afficher:
+            raise ExceptionFilmsGenresAfficher(f"fichier : {Path(__file__).name}  ;  {enfants_sante_afficher.__name__} ;"
+                                               f"{Exception_enfants_sante_afficher}")
 
-    print("films_genres_afficher  ", data_genres_films_afficher)
+    print("enfants_sante_afficher  ", data_genres_films_afficher)
     # Envoie la page "HTML" au serveur.
     return render_template("enfants_sante/enfants_sante_afficher.html", data=data_genres_films_afficher)
 
 
 """
-    nom: edit_genre_film_selected
+    nom: edit_enfant_sante_selected
     On obtient un objet "objet_dumpbd"
 
     Récupère la liste de tous les parents du film sélectionné par le bouton "MODIFIER" de "enfants_sante_afficher.html"
@@ -89,21 +89,21 @@ def films_genres_afficher(id_film_sel):
 """
 
 
-@app.route("/edit_genre_film_selected", methods=['GET', 'POST'])
-def edit_genre_film_selected():
+@app.route("/edit_enfant_sante_selected", methods=['GET', 'POST'])
+def edit_enfant_sante_selected():
     if request.method == "GET":
         try:
             with DBconnection() as mc_afficher:
                 strsql_genres_afficher = """SELECT id_sante, Allergie FROM t_sante ORDER BY id_sante ASC"""
                 mc_afficher.execute(strsql_genres_afficher)
             data_genres_all = mc_afficher.fetchall()
-            print("dans edit_genre_film_selected ---> data_genres_all", data_genres_all)
+            print("dans edit_enfant_sante_selected ---> data_genres_all", data_genres_all)
 
             # Récupère la valeur de "id_enfants" du formulaire html "enfants_sante_afficher.html"
             # l'utilisateur clique sur le bouton "Modifier" et on récupère la valeur de "id_enfants"
-            # grâce à la variable "id_film_genres_edit_html" dans le fichier "enfants_sante_afficher.html"
-            # href="{{ url_for('edit_genre_film_selected', id_film_genres_edit_html=row.id_enfants) }}"
-            id_film_genres_edit = request.values['id_film_genres_edit_html']
+            # grâce à la variable "id_enfants_sante_edit_html" dans le fichier "enfants_sante_afficher.html"
+            # href="{{ url_for('edit_enfant_sante_selected', id_enfants_sante_edit_html=row.id_enfants) }}"
+            id_film_genres_edit = request.values['id_enfants_sante_edit_html']
 
             # Mémorise l'id du film dans une variable de session
             # (ici la sécurité de l'application n'est pas engagée)
@@ -113,13 +113,13 @@ def edit_genre_film_selected():
             # Constitution d'un dictionnaire pour associer l'id du film sélectionné avec un nom de variable
             valeur_id_film_selected_dictionnaire = {"value_id_enfants_selected": id_film_genres_edit}
 
-            # Récupère les données grâce à 3 requêtes MySql définie dans la fonction genres_films_afficher_data
+            # Récupère les données grâce à 3 requêtes MySql définie dans la fonction enfants_sante_afficher_data
             # 1) Sélection du film choisi
             # 2) Sélection des parents "déjà" attribués pour le film.
             # 3) Sélection des parents "pas encore" attribués pour le film choisi.
-            # ATTENTION à l'ordre d'assignation des variables retournées par la fonction "genres_films_afficher_data"
+            # ATTENTION à l'ordre d'assignation des variables retournées par la fonction "enfants_sante_afficher_data"
             data_genre_film_selected, data_genres_films_non_attribues, data_genres_films_attribues = \
-                genres_films_afficher_data(valeur_id_film_selected_dictionnaire)
+                enfants_sante_afficher_data(valeur_id_film_selected_dictionnaire)
 
             print(data_genre_film_selected)
             lst_data_film_selected = [item['id_enfants'] for item in data_genre_film_selected]
@@ -154,7 +154,7 @@ def edit_genre_film_selected():
 
         except Exception as Exception_edit_enfants_sante_selected:
             raise ExceptionEditGenreFilmSelected(f"fichier : {Path(__file__).name}  ;  "
-                                                 f"{edit_genre_film_selected.__name__} ; "
+                                                 f"{edit_enfant_sante_selected.__name__} ; "
                                                  f"{Exception_edit_enfants_sante_selected}")
 
     return render_template("enfants_sante/enfants_sante_modifier_tags_dropbox.html",
@@ -165,7 +165,7 @@ def edit_genre_film_selected():
 
 
 """
-    nom: update_genre_film_selected
+    nom: update_enfant_sante_selected
 
     Récupère la liste de tous les parents du film sélectionné par le bouton "MODIFIER" de "enfants_sante_afficher.html"
     
@@ -178,8 +178,8 @@ def edit_genre_film_selected():
 """
 
 
-@app.route("/update_genre_film_selected", methods=['GET', 'POST'])
-def update_genre_film_selected():
+@app.route("/update_enfant_sante_selected", methods=['GET', 'POST'])
+def update_enfant_sante_selected():
     if request.method == "POST":
         try:
             # Récupère l'id du film sélectionné
@@ -253,18 +253,18 @@ def update_genre_film_selected():
                     # sera interprété, ainsi on fera automatiquement un commit
                     mconn_bd.execute(strsql_delete_genre_film, valeurs_film_sel_genre_sel_dictionnaire)
 
-        except Exception as Exception_update_genre_film_selected:
+        except Exception as Exception_update_enfant_sante_selected:
             raise ExceptionUpdateGenreFilmSelected(f"fichier : {Path(__file__).name}  ;  "
-                                                   f"{update_genre_film_selected.__name__} ; "
-                                                   f"{Exception_update_genre_film_selected}")
+                                                   f"{update_enfant_sante_selected.__name__} ; "
+                                                   f"{Exception_update_enfant_sante_selected}")
 
     # Après cette mise à jour de la table intermédiaire "t_enfants_sante",
     # on affiche les enfants et le(urs) genre(s) associé(s).
-    return redirect(url_for('films_genres_afficher', id_film_sel=id_film_selected))
+    return redirect(url_for('enfants_sante_afficher', id_film_sel=id_film_selected))
 
 
 """
-    nom: genres_films_afficher_data
+    nom: enfants_sante_afficher_data
 
     Récupère la liste de tous les parents du film sélectionné par le bouton "MODIFIER" de "enfants_sante_afficher.html"
     Nécessaire pour afficher tous les "TAGS" des parents, ainsi l'utilisateur voit les parents à disposition
@@ -273,7 +273,7 @@ def update_genre_film_selected():
 """
 
 
-def genres_films_afficher_data(valeur_id_film_selected_dict):
+def enfants_sante_afficher_data(valeur_id_film_selected_dict):
     print("valeur_id_film_selected_dict...", valeur_id_film_selected_dict)
     try:
 
@@ -299,7 +299,7 @@ def genres_films_afficher_data(valeur_id_film_selected_dict):
             # Récupère les données de la requête.
             data_genres_films_non_attribues = mc_afficher.fetchall()
             # Affichage dans la console
-            print("genres_films_afficher_data ----> data_genres_films_non_attribues ", data_genres_films_non_attribues,
+            print("enfants_sante_afficher_data ----> data_genres_films_non_attribues ", data_genres_films_non_attribues,
                   " Type : ",
                   type(data_genres_films_non_attribues))
 
@@ -321,7 +321,7 @@ def genres_films_afficher_data(valeur_id_film_selected_dict):
             # Retourne les données des "SELECT"
             return data_film_selected, data_genres_films_non_attribues, data_genres_films_attribues
 
-    except Exception as Exception_genres_films_afficher_data:
+    except Exception as Exception_enfants_sante_afficher_data:
         raise ExceptionGenresFilmsAfficherData(f"fichier : {Path(__file__).name}  ;  "
-                                               f"{genres_films_afficher_data.__name__} ; "
-                                               f"{Exception_genres_films_afficher_data}")
+                                               f"{enfants_sante_afficher_data.__name__} ; "
+                                               f"{Exception_enfants_sante_afficher_data}")
