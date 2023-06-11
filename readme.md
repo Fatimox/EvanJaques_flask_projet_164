@@ -43,7 +43,7 @@ Installer “GIT”
 ## Démarrer le serveur MySql (Laragon(heidi.sql), uwamp ou xamp ou mamp, etc.))
 
 * Dans “PyCharm”, importer MA BD à partir du fichier DUMP
-* Ouvrir le fichier APP_ETAM_164/database/1_ImportationDumpSql.py
+* Ouvrir le fichier APP_YOGA_164/database/1_ImportationDumpSql.py
 * Cliquer avec le bouton droit sur l’onglet de ce fichier et choisir “run” (CTRL-MAJ-F10)
 
 ## En cas d’erreurs /!\ 
@@ -52,7 +52,7 @@ Installer “GIT”
 
 ## Test simple de la connexion à la BD
 
-* Ouvrir le fichier APP_ETAM_164/database/2_test_connection_bd.py
+* Ouvrir le fichier APP_YOGA_164/database/2_test_connection_bd.py
 * Cliquer avec le bouton droit sur l’onglet de ce fichier et choisir “run” (CTRL-MAJ-F10)
 
 ## Démarrer le microframework FLASK
@@ -64,4 +64,3 @@ Installer “GIT”
 * Cliquer dessus afin d'ouvrir dans votre navigateur mon projet
 
 # Vous voici sur le visuel de mon projet final !
-https://info164.github.io/doc164ver1/index.htmls
