@@ -33,9 +33,9 @@ def parents_enfants_afficher(id_parents_enfants_sel):
         try:
             with DBconnection() as mc_afficher:
                 strsql_parents_enfants_afficher_data = """SELECT id_parents, Nom, Prenom,
-                                                            GROUP_CONCAT(DateNaissance) as EnfantsParents FROM t_parents_enfants
+                                                            GROUP_CONCAT(Prenom) as EnfantsParents FROM t_parents_enfants
                                                             RIGHT JOIN t_parents ON t_parents.id_parents = t_parents_enfants.fk_parents
-                                                            LEFT JOIN t_parents ON t_parents.id_parents = t_parents_enfants.fk_parents
+                                                            LEFT JOIN t_enfants ON t_enfants.id_enfants = t_parents_enfants.fk_enfants
                                                             GROUP BY id_parents"""
 
                 if id_parents_enfants_sel == 0:
@@ -70,7 +70,7 @@ def parents_enfants_afficher(id_parents_enfants_sel):
 
     print("parents_enfants_afficher  ", data_genres_films_afficher)
     # Envoie la page "HTML" au serveur.
-    return render_template("enfants_sante/parents_enfants_afficher.html", data=data_genres_films_afficher)
+    return render_template("parents_enfants/parents_enfants_afficher.html", data=data_genres_films_afficher)
 
 
 """
@@ -157,7 +157,7 @@ def edit_parents_enfants_selected():
                                                  f"{edit_parents_enfants_selected.__name__} ; "
                                                  f"{Exception_edit_parents_enfants_selected}")
 
-    return render_template("enfants_sante/parents_enfants_modifier_tags_dropbox.html",
+    return render_template("parents_enfants/parents_enfants_modifier_tags_dropbox.html",
                            data_genres=data_genres_all,
                            data_film_selected=data_genre_film_selected,
                            data_genres_attribues=data_genres_films_attribues,
@@ -277,7 +277,7 @@ def parents_enfants_afficher_data(valeur_id_parents_enfants_selected_dict):
     print("valeur_id_parents_enfants_selected_dict...", valeur_id_parents_enfants_selected_dict)
     try:
 
-        strsql_film_selected = """SELECT id_parents, Nom, Prenom, DateNaissance, GROUP_CONCAT(id_enfants) as EnfantsParents FROM t_parents_enfants
+        strsql_film_selected = """SELECT id_parents, Nom, Prenom, GROUP_CONCAT(id_enfants) as EnfantsParents FROM t_parents_enfants
                                         INNER JOIN t_parents ON t_parents.id_parents = t_parents_enfants.fk_parents
                                         INNER JOIN t_enfants ON t_enfants.id_enfants = t_parents_enfants.fk_enfants
                                         WHERE id_parents = %(value_id_parents_selected)s"""

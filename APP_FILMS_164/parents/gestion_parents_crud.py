@@ -96,7 +96,7 @@ def genres_afficher(order_by, id_parent_sel):
     
     But : Ajouter un genre pour un film
     
-    Remarque :  Dans le champ "name_genre_html" du formulaire "parents/parents_ajouter.html",
+    Remarque :  Dans le champ "montant_facture_html" du formulaire "parents/parents_ajouter.html",
                 le contrôle de la saisie s'effectue ici en Python.
                 On transforme la saisie en minuscules.
                 On ne doit pas accepter des valeurs vides, des valeurs avec des chiffres,
@@ -112,15 +112,15 @@ def genres_ajouter_wtf():
     if request.method == "POST":
         try:
             if form.validate_on_submit():
-                name_genre_wtf = form.nom_genre_wtf.data
-                name_genre = name_genre_wtf
+                montant_facture_wtf = form.nom_genre_wtf.data
+                montant_facture = montant_facture_wtf
 
                 name_parents_wtf = form.prenom_parents_wtf.data
                 name_parents = name_parents_wtf
                 name_telephone_wtf = form.telephone_parents_wtf.data
                 name_telephone = name_telephone_wtf
 
-                valeurs_insertion_dictionnaire = {"value_intitule_genre": name_genre, "value_intitule_parents": name_parents, "value_intitule_telephone": name_telephone}
+                valeurs_insertion_dictionnaire = {"value_intitule_genre": montant_facture, "value_intitule_parents": name_parents, "value_intitule_telephone": name_telephone}
                 print("valeurs_insertion_dictionnaire ", valeurs_insertion_dictionnaire)
 
                 strsql_insert_genre = """INSERT INTO t_parents (id_parents,Nom,Prenom) VALUES (NULL,%(value_intitule_genre)s,%(value_intitule_parents)s)"""
@@ -176,17 +176,17 @@ def genre_update_wtf():
         if form_update.validate_on_submit():
             # Récupèrer la valeur du champ depuis "factures_update_wtf.html" après avoir cliqué sur "SUBMIT".
             # Puis la convertir en lettres minuscules.
-            name_genre_update = form_update.nom_genre_update_wtf.data
-            name_genre_update = name_genre_update
+            montant_facture_update = form_update.nom_genre_update_wtf.data
+            montant_facture_update = montant_facture_update
             date_genre_essai = form_update.date_genre_wtf_essai.data
 
             valeur_update_dictionnaire = {"value_id_genre": id_genre_update,
-                                          "value_name_genre": name_genre_update,
+                                          "value_montant_facture": montant_facture_update,
                                           "value_date_genre_essai": date_genre_essai
                                           }
             print("valeur_update_dictionnaire ", valeur_update_dictionnaire)
 
-            str_sql_update_intitulegenre = """UPDATE t_parents SET Prenom = %(value_name_genre)s, 
+            str_sql_update_intitulegenre = """UPDATE t_parents SET Prenom = %(value_montant_facture)s, 
             Nom = %(value_date_genre_essai)s WHERE id_parents = %(value_id_genre)s """
             with DBconnection() as mconn_bd:
                 mconn_bd.execute(str_sql_update_intitulegenre, valeur_update_dictionnaire)

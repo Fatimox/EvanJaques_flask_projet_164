@@ -86,7 +86,7 @@ def factures_afficher(order_by, id_factures_sel):
     
     But : Ajouter un genre pour un film
     
-    Remarque :  Dans le champ "name_genre_html" du formulaire "factures/factures_ajouter.html",
+    Remarque :  Dans le champ "montant_facture_html" du formulaire "factures/factures_ajouter.html",
                 le contrôle de la saisie s'effectue ici en Python.
                 On transforme la saisie en minuscules.
                 On ne doit pas accepter des valeurs vides, des valeurs avec des chiffres,
@@ -102,23 +102,19 @@ def facture_ajouter_wtf():
     if request.method == "POST":
         try:
             if form.validate_on_submit():
-                name_genre_wtf = form.nom_genre_wtf.data
-                name_genre = name_genre_wtf
+                montant_facture_wtf = form.montant_facture_wtf.data
+                montant_facture = montant_facture_wtf
 
-                name_factures_wtf = form.prenom_factures_wtf.data
-                name_factures = name_factures_wtf
-                name_telephone_wtf = form.telephone_factures_wtf.data
-                name_telephone = name_telephone_wtf
+                date_facture_wtf = form.date_factures_wtf.data
+                date_facture = date_facture_wtf
 
-                valeurs_insertion_dictionnaire = {"value_intitule_genre": name_genre, "value_intitule_factures": name_factures, "value_intitule_telephone": name_telephone}
+                valeurs_insertion_dictionnaire = {"value_montant_facture": montant_facture, "value_date_facture": date_facture}
                 print("valeurs_insertion_dictionnaire ", valeurs_insertion_dictionnaire)
 
-                strsql_insert_genre = """INSERT INTO t_factures (id_factures,Nom,Prenom) VALUES (NULL,%(value_intitule_genre)s,%(value_intitule_factures)s)"""
-                strsql_insert_telephone = """INSERT INTO t_factures_telephone (id_factures_telephone, fk_factures, fk_telephone)
-                                                    VALUES (NULL, %(value_intitule_factures)s, %(value_intitule_telephone)s)"""
+                strsql_insert_genre = """INSERT INTO t_factures (id_factures,Montant,Date) VALUES (NULL,%(value_montant_facture)s,%(value_date_facture)s)"""
+
                 with DBconnection() as mconn_bd:
                     mconn_bd.execute(strsql_insert_genre, valeurs_insertion_dictionnaire)
-                    mconn_bd.execute(strsql_insert_telephone, valeurs_insertion_dictionnaire)
 
                 flash(f"Données insérées !!", "success")
                 print(f"Données insérées !!")
@@ -171,13 +167,13 @@ def facture_update_wtf():
             date_genre_essai = form_update.date_genre_wtf_essai.data
 
             valeur_update_dictionnaire = {"value_id_genre": id_facture_update,
-                                          "value_name_genre": name_facture_update,
+                                          "value_montant_facture": name_facture_update,
                                           "value_date_genre_essai": date_genre_essai
                                           }
             print("valeur_update_dictionnaire ", valeur_update_dictionnaire)
 
-            str_sql_update_intitulegenre = """UPDATE t_factures SET Prenom = %(value_name_genre)s, 
-            Nom = %(value_date_genre_essai)s WHERE id_factures = %(value_id_genre)s """
+            str_sql_update_intitulegenre = """UPDATE t_factures SET Date = %(value_montant_facture)s, 
+            Montant = %(value_date_genre_essai)s WHERE id_factures = %(value_id_genre)s """
             with DBconnection() as mconn_bd:
                 mconn_bd.execute(str_sql_update_intitulegenre, valeur_update_dictionnaire)
 
@@ -189,19 +185,19 @@ def facture_update_wtf():
             return redirect(url_for('factures_afficher', order_by="ASC", id_factures_sel=id_facture_update))
         elif request.method == "GET":
             # Opération sur la BD pour récupérer "id_factures" et "intitule_genre" de la "t_factures"
-            str_sql_id_genre = "SELECT id_factures, Prenom, Nom FROM t_factures " \
+            str_sql_id_genre = "SELECT id_factures, Date, Montant FROM t_factures " \
                                "WHERE id_factures = %(value_id_genre)s"
             valeur_select_dictionnaire = {"value_id_genre": id_facture_update}
             with DBconnection() as mybd_conn:
                 mybd_conn.execute(str_sql_id_genre, valeur_select_dictionnaire)
             # Une seule valeur est suffisante "fetchone()", vu qu'il n'y a qu'un seul champ "nom genre" pour l'UPDATE
             data_nom_genre = mybd_conn.fetchone()
-            print("Nom ", data_nom_genre, " type ", type(data_nom_genre), " genre ",
-                  data_nom_genre["Prenom"])
+            print("Montant ", data_nom_genre, " type ", type(data_nom_genre), " genre ",
+                  data_nom_genre["Date"])
 
             # Afficher la valeur sélectionnée dans les champs du formulaire "factures_update_wtf.html"
-            form_update.nom_facture_update_wtf.data = data_nom_genre["Prenom"]
-            form_update.date_genre_wtf_essai.data = data_nom_genre["Nom"]
+            form_update.nom_facture_update_wtf.data = data_nom_genre["Date"]
+            form_update.date_genre_wtf_essai.data = data_nom_genre["Montant"]
 
     except Exception as Exception_facture_update_wtf:
         raise ExceptionGenreUpdateWtf(f"fichier : {Path(__file__).name}  ;  "
@@ -257,18 +253,10 @@ def facture_delete_wtf():
                 valeur_delete_dictionnaire = {"value_id_genre": id_facture_delete}
                 print("valeur_delete_dictionnaire ", valeur_delete_dictionnaire)
 
-                str_sql_delete_fk_adresse = """DELETE FROM t_factures_adresse WHERE fk_adresse = %(value_id_genre)s"""
-                str_sql_delete_fk_factures = """DELETE FROM t_factures_factures WHERE fk_factures = %(value_id_genre)s"""
-                str_sql_delete_fk_mail = """DELETE FROM t_factures_mail WHERE fk_mail = %(value_id_genre)s"""
-                str_sql_delete_fk_telephone = """DELETE FROM t_factures_telephone WHERE fk_telephone = %(value_id_genre)s"""
                 str_sql_delete_factures = """DELETE FROM t_factures WHERE id_factures = %(value_id_genre)s"""
                 # Manière brutale d'effacer d'abord la "fk_genre", même si elle n'existe pas dans la "t_enfants_sante"
                 # Ensuite on peut effacer le genre vu qu'il n'est plus "lié" (INNODB) dans la "t_enfants_sante"
                 with DBconnection() as mconn_bd:
-                    mconn_bd.execute(str_sql_delete_fk_adresse, valeur_delete_dictionnaire)
-                    mconn_bd.execute(str_sql_delete_fk_factures, valeur_delete_dictionnaire)
-                    mconn_bd.execute(str_sql_delete_fk_mail, valeur_delete_dictionnaire)
-                    mconn_bd.execute(str_sql_delete_fk_telephone, valeur_delete_dictionnaire)
                     mconn_bd.execute(str_sql_delete_factures, valeur_delete_dictionnaire)
 
                 flash(f"Genre définitivement effacé !!", "success")
@@ -282,7 +270,7 @@ def facture_delete_wtf():
             print(id_facture_delete, type(id_facture_delete))
 
             # Requête qui affiche tous les enfants_sante qui ont le genre que l'utilisateur veut effacer
-            str_sql_genres_films_delete = """SELECT id_factures, Nom, Prenom FROM t_factures WHERE id_factures = %(value_id_genre)s"""
+            str_sql_genres_films_delete = """SELECT id_factures, Montant, Date FROM t_factures WHERE id_factures = %(value_id_genre)s"""
 
 
             with DBconnection() as mydb_conn:
@@ -295,17 +283,17 @@ def facture_delete_wtf():
                 session['data_films_attribue_facture_delete'] = data_films_attribue_facture_delete
 
                 # Opération sur la BD pour récupérer "id_factures" et "intitule_genre" de la "t_factures"
-                str_sql_id_genre = "SELECT id_factures, Nom, Prenom FROM t_factures WHERE id_factures = %(value_id_genre)s"
+                str_sql_id_genre = "SELECT id_factures, Montant, Date FROM t_factures WHERE id_factures = %(value_id_genre)s"
 
                 mydb_conn.execute(str_sql_id_genre, valeur_select_dictionnaire)
                 # Une seule valeur est suffisante "fetchone()",
                 # vu qu'il n'y a qu'un seul champ "nom genre" pour l'action DELETE
                 data_nom_genre = mydb_conn.fetchone()
                 print("data_nom_genre ", data_nom_genre, " type ", type(data_nom_genre), " genre ",
-                      data_nom_genre["Nom"])
+                      data_nom_genre["Montant"])
 
             # Afficher la valeur sélectionnée dans le champ du formulaire "factures_delete_wtf.html"
-            form_delete.nom_facture_delete_wtf.data = data_nom_genre["Nom"]
+            form_delete.nom_facture_delete_wtf.data = data_nom_genre["Montant"]
 
             # Le bouton pour l'action "DELETE" dans le form. "factures_delete_wtf.html" est caché.
             btn_submit_del = False

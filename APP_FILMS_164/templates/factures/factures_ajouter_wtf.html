@@ -12,23 +12,16 @@
 				{{ form.hidden_tag() }}
 				<div class="form-group">
 					<p>
-						{{ form.nom_genre_wtf.label }}<br>
-						{{ form.nom_genre_wtf(size=32) }}<br>
-						{% for error in form.nom_genre_wtf.errors %}
+						{{ form.montant_facture_wtf.label }}<br>
+						{{ form.montant_facture_wtf(size=32) }}<br>
+						{% for error in form.montant_facture_wtf.errors %}
 							<span style="color: red;">[{{ error }}]</span>
 						{% endfor %}
 					</p>
 					<p>
-						{{ form.prenom_parents_wtf.label }}<br>
-						{{ form.prenom_parents_wtf(size=32) }}<br>
-						{% for error in form.prenom_parents_wtf.errors %}
-							<span style="color: red;">[{{ error }}]</span>
-						{% endfor %}
-					</p>
-					<p>
-						{{ form.telephone_parents_wtf.label }}<br>
-						{{ form.telephone_parents_wtf(size=32) }}<br>
-						{% for error in form.telephone_parents_wtf.errors %}
+						{{ form.date_factures_wtf.label }}<br>
+						{{ form.date_factures_wtf(size=32) }}<br>
+						{% for error in form.date_factures_wtf.errors %}
 							<span style="color: red;">[{{ error }}]</span>
 						{% endfor %}
 					</p>

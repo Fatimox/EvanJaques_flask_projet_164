@@ -15,31 +15,18 @@ class FormWTFAjouterFactures(FlaskForm):
         Dans le formulaire "facture_ajouter_wtf.html" on impose que le champ soit rempli.
         Définition d'un "bouton" submit avec un libellé personnalisé.
     """
-    nom_factures_regexp = "^([A-Z]|[a-zÀ-ÖØ-öø-ÿ])[A-Za-zÀ-ÖØ-öø-ÿ]*['\- ]?[A-Za-zÀ-ÖØ-öø-ÿ]+$"
-    telephone_factures_regexp = ""
-    nom_genre_wtf = StringField("Ajouter le nom du parent", validators=[Length(min=2, max=20, message="min 2 max 20"),
-                                                                   Regexp(nom_factures_regexp,
+    date_factures_regexp = "^([A-Z]|[a-zÀ-ÖØ-öø-ÿ])[A-Za-zÀ-ÖØ-öø-ÿ]*['\- ]?[A-Za-zÀ-ÖØ-öø-ÿ]+$"
+    montant_factures_regexp = ""
+    montant_facture_wtf = StringField("Ajouter le montant de la facture", validators=[Length(min=2, max=20, message="min 2 max 20"),
+                                                                   Regexp(montant_factures_regexp,
                                                                           message="Pas de chiffres, de caractères "
                                                                                   "spéciaux, "
                                                                                   "d'espace à double, de double "
                                                                                   "apostrophe, de double trait union")
                                                                    ])
-    prenom_factures_wtf = StringField("Ajouter le prénom du parent", validators=[Length(min=2, max=20, message="min 2 max 20"),
-                                                                 Regexp(nom_factures_regexp,
-                                                                        message="Pas de chiffres, de caractères "
-                                                                                "spéciaux, "
-                                                                                "d'espace à double, de double "
-                                                                                "apostrophe, de double trait union")
-                                                                 ])
-    telephone_factures_wtf = StringField("Ajouter le prénom du parent",
-                                     validators=[Length(min=2, max=20, message="min 2 max 20"),
-                                                 Regexp(telephone_factures_regexp,
-                                                        message="Pas de chiffres, de caractères "
-                                                                "spéciaux, "
-                                                                "d'espace à double, de double "
-                                                                "apostrophe, de double trait union")
-                                                 ])
-    submit = SubmitField("Enregistrer le parent")
+    date_factures_wtf = DateField("Date de la facture", validators=[InputRequired("Date obligatoire"),
+                                                                                 DataRequired("Date non valide")])
+    submit = SubmitField("Enregistrer la facture")
 
 
 class FormWTFUpdateFactures(FlaskForm):
@@ -48,7 +35,7 @@ class FormWTFUpdateFactures(FlaskForm):
         Définition d'un "bouton" submit avec un libellé personnalisé.
     """
     nom_facture_update_regexp = "^([A-Z]|[a-zÀ-ÖØ-öø-ÿ])[A-Za-zÀ-ÖØ-öø-ÿ]*['\- ]?[A-Za-zÀ-ÖØ-öø-ÿ]+$"
-    nom_facture_update_wtf = StringField("Nom du parent ", validators=[Length(min=2, max=20, message="min 2 max 20"),
+    nom_facture_update_wtf = StringField("Montant du parent ", validators=[Length(min=2, max=20, message="min 2 max 20"),
                                                                           Regexp(nom_facture_update_regexp,
                                                                                  message="Pas de chiffres, de "
                                                                                          "caractères "
@@ -57,15 +44,8 @@ class FormWTFUpdateFactures(FlaskForm):
                                                                                          "apostrophe, de double trait "
                                                                                          "union")
                                                                           ])
-    date_genre_wtf_essai = StringField("Prénom du parent ", validators=[Length(min=2, max=20, message="min 2 max 20"),
-                                                                          Regexp(nom_facture_update_regexp,
-                                                                                 message="Pas de chiffres, de "
-                                                                                         "caractères "
-                                                                                         "spéciaux, "
-                                                                                         "d'espace à double, de double "
-                                                                                         "apostrophe, de double trait "
-                                                                                         "union")
-                                                                          ])
+    date_genre_wtf_essai = DateField("Date de naissance", validators=[InputRequired("Date obligatoire"),
+                                                                                 DataRequired("Date non valide")])
     submit = SubmitField("Update parent")
 
 
