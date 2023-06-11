@@ -53,6 +53,8 @@ try:
     from APP_FILMS_164.factures import gestion_factures_crud
     from APP_FILMS_164.factures import gestion_factures_wtf_forms
 
+    from APP_FILMS_164.parents_enfants import gestion_parents_enfants_crud
+
 except Exception as Exception_init_app_films_164:
     print(f"4567756434 Une erreur est survenue {type(Exception_init_app_films_164)} dans"
           f"__init__ {Exception_init_app_films_164.args}")

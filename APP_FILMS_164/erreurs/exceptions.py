@@ -110,6 +110,8 @@ class ExceptionUpdateGenreFilmSelected(Base):
 class ExceptionGenresFilmsAfficherData(Base):
     pass
 
+class ExceptionEnfantsParentsAfficherData(Base):
+    pass
 
 class ExceptionFilmUpdateWtf(Base):
     pass
