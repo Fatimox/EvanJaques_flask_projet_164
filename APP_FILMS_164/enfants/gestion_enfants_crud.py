@@ -85,7 +85,7 @@ def film_update_wtf():
     try:
         print(" on submit ", form_update_film.validate_on_submit())
         if form_update_film.validate_on_submit():
-            # Récupèrer la valeur du champ depuis "parents_update_wtf.html" après avoir cliqué sur "SUBMIT".
+            # Récupèrer la valeur du champ depuis "factures_update_wtf.html" après avoir cliqué sur "SUBMIT".
             nom_film_update = form_update_film.nom_enfants_wtf.data
             duree_film_update = form_update_film.prenom_enfants_wtf.data
             datenaissance_film_update = form_update_film.datenaissance_enfants_wtf.data

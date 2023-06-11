@@ -34,12 +34,10 @@ USE evan_jaques_info1a_164;
 
 
 -- Listage de la structure de la base pour evan_jaques_info1a_164
-DROP DATABASE IF EXISTS `evan_jaques_info1a_164`;
 CREATE DATABASE IF NOT EXISTS `evan_jaques_info1a_164` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `evan_jaques_info1a_164`;
 
 -- Listage de la structure de table evan_jaques_info1a_164. t_adresse
-DROP TABLE IF EXISTS `t_adresse`;
 CREATE TABLE IF NOT EXISTS `t_adresse` (
   `id_adresse` int NOT NULL AUTO_INCREMENT,
   `NomRue` varchar(50) DEFAULT NULL,
@@ -58,7 +56,6 @@ INSERT INTO `t_adresse` (`id_adresse`, `NomRue`, `NumeroRue`, `Ville`, `Npa`) VA
 	(5, 'Route d\'en haut', 13, 'Villeneuve', 1123);
 
 -- Listage de la structure de table evan_jaques_info1a_164. t_cours
-DROP TABLE IF EXISTS `t_cours`;
 CREATE TABLE IF NOT EXISTS `t_cours` (
   `id_cours` int NOT NULL AUTO_INCREMENT,
   `Cours1` varchar(50) DEFAULT NULL,
@@ -69,7 +66,6 @@ CREATE TABLE IF NOT EXISTS `t_cours` (
 -- Listage des données de la table evan_jaques_info1a_164.t_cours : ~0 rows (environ)
 
 -- Listage de la structure de table evan_jaques_info1a_164. t_enfants
-DROP TABLE IF EXISTS `t_enfants`;
 CREATE TABLE IF NOT EXISTS `t_enfants` (
   `id_enfants` int NOT NULL AUTO_INCREMENT,
   `Nom` varchar(50) DEFAULT NULL,
@@ -85,7 +81,6 @@ INSERT INTO `t_enfants` (`id_enfants`, `Nom`, `Prenom`, `DateNaissance`) VALUES
 	(3, 'Salin', 'Max', '2022-11-17');
 
 -- Listage de la structure de table evan_jaques_info1a_164. t_enfants_cours
-DROP TABLE IF EXISTS `t_enfants_cours`;
 CREATE TABLE IF NOT EXISTS `t_enfants_cours` (
   `id_enfants_cours` int NOT NULL AUTO_INCREMENT,
   `fk_enfants` int DEFAULT NULL,
@@ -100,7 +95,6 @@ CREATE TABLE IF NOT EXISTS `t_enfants_cours` (
 -- Listage des données de la table evan_jaques_info1a_164.t_enfants_cours : ~0 rows (environ)
 
 -- Listage de la structure de table evan_jaques_info1a_164. t_enfants_sante
-DROP TABLE IF EXISTS `t_enfants_sante`;
 CREATE TABLE IF NOT EXISTS `t_enfants_sante` (
   `id_enfants_sante` int NOT NULL AUTO_INCREMENT,
   `fk_enfants` int DEFAULT NULL,
@@ -120,7 +114,6 @@ INSERT INTO `t_enfants_sante` (`id_enfants_sante`, `fk_enfants`, `fk_sante`) VAL
 	(26, 3, 1);
 
 -- Listage de la structure de table evan_jaques_info1a_164. t_factures
-DROP TABLE IF EXISTS `t_factures`;
 CREATE TABLE IF NOT EXISTS `t_factures` (
   `id_factures` int NOT NULL AUTO_INCREMENT,
   `Montant` int DEFAULT NULL,
@@ -135,7 +128,6 @@ INSERT INTO `t_factures` (`id_factures`, `Montant`, `Date`) VALUES
 	(3, 80, '2023-06-05');
 
 -- Listage de la structure de table evan_jaques_info1a_164. t_mail
-DROP TABLE IF EXISTS `t_mail`;
 CREATE TABLE IF NOT EXISTS `t_mail` (
   `id_mail` int NOT NULL AUTO_INCREMENT,
   `NomMail` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
@@ -151,7 +143,6 @@ INSERT INTO `t_mail` (`id_mail`, `NomMail`) VALUES
 	(5, 'sophie.lager@outlook.com');
 
 -- Listage de la structure de table evan_jaques_info1a_164. t_parents
-DROP TABLE IF EXISTS `t_parents`;
 CREATE TABLE IF NOT EXISTS `t_parents` (
   `id_parents` int NOT NULL AUTO_INCREMENT,
   `Nom` varchar(50) DEFAULT NULL,
@@ -168,7 +159,6 @@ INSERT INTO `t_parents` (`id_parents`, `Nom`, `Prenom`) VALUES
 	(5, 'Sallin', 'Fabienne');
 
 -- Listage de la structure de table evan_jaques_info1a_164. t_parents_adresse
-DROP TABLE IF EXISTS `t_parents_adresse`;
 CREATE TABLE IF NOT EXISTS `t_parents_adresse` (
   `id_parents_adresse` int NOT NULL AUTO_INCREMENT,
   `fk_parents` int DEFAULT NULL,
@@ -189,7 +179,6 @@ INSERT INTO `t_parents_adresse` (`id_parents_adresse`, `fk_parents`, `fk_adresse
 	(5, 5, 5);
 
 -- Listage de la structure de table evan_jaques_info1a_164. t_parents_factures
-DROP TABLE IF EXISTS `t_parents_factures`;
 CREATE TABLE IF NOT EXISTS `t_parents_factures` (
   `id_parents_factures` int NOT NULL AUTO_INCREMENT,
   `fk_parents` int DEFAULT NULL,
@@ -208,7 +197,6 @@ INSERT INTO `t_parents_factures` (`id_parents_factures`, `fk_parents`, `fk_factu
 	(3, 3, 1);
 
 -- Listage de la structure de table evan_jaques_info1a_164. t_parents_mail
-DROP TABLE IF EXISTS `t_parents_mail`;
 CREATE TABLE IF NOT EXISTS `t_parents_mail` (
   `id_parents_mail` int NOT NULL AUTO_INCREMENT,
   `fk_parents` int DEFAULT NULL,
@@ -228,7 +216,6 @@ INSERT INTO `t_parents_mail` (`id_parents_mail`, `fk_parents`, `fk_mail`) VALUES
 	(4, 5, 3);
 
 -- Listage de la structure de table evan_jaques_info1a_164. t_parents_telephone
-DROP TABLE IF EXISTS `t_parents_telephone`;
 CREATE TABLE IF NOT EXISTS `t_parents_telephone` (
   `id_parents_telephone` int NOT NULL AUTO_INCREMENT,
   `fk_parents` int DEFAULT NULL,
@@ -249,7 +236,6 @@ INSERT INTO `t_parents_telephone` (`id_parents_telephone`, `fk_parents`, `fk_tel
 	(5, 5, 10);
 
 -- Listage de la structure de table evan_jaques_info1a_164. t_sante
-DROP TABLE IF EXISTS `t_sante`;
 CREATE TABLE IF NOT EXISTS `t_sante` (
   `id_sante` int NOT NULL AUTO_INCREMENT,
   `Allergie` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
@@ -263,7 +249,6 @@ INSERT INTO `t_sante` (`id_sante`, `Allergie`) VALUES
 	(3, 'Accariens');
 
 -- Listage de la structure de table evan_jaques_info1a_164. t_telephone
-DROP TABLE IF EXISTS `t_telephone`;
 CREATE TABLE IF NOT EXISTS `t_telephone` (
   `id_telephone` int NOT NULL AUTO_INCREMENT,
   `NumTel` varchar(50) DEFAULT NULL,
@@ -282,7 +267,8 @@ INSERT INTO `t_telephone` (`id_telephone`, `NumTel`, `Indicatif`) VALUES
 	(7, '0796915472', 41),
 	(8, '0779980102', 41),
 	(9, '0792235176', 41),
-	(10, '0786443221', 41);
+	(10, '0786443221', 41),
+	(11, '0798798488', NULL);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

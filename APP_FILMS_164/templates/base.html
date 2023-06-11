@@ -44,17 +44,8 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
 				<ul class="navbar-nav">
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="navdropdownparents" role="button"
-						   data-bs-toggle="dropdown" aria-expanded="false">
-							Parents
-						</a>
-						<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-							<li><a class="nav-link" href="{{ url_for('genres_afficher', order_by='ASC', id_genre_sel=0) }}">Parents</a></li>
-							<li><a class="nav-link" href="{{ url_for('genres_afficher', order_by='ASC', id_genre_sel=0) }}">Telephone</a></li>
-							<li><a class="nav-link" href="{{ url_for('genres_afficher', order_by='ASC', id_genre_sel=0) }}">Mail</a></li>
-							<li><a class="nav-link" href="{{ url_for('genres_afficher', order_by='ASC', id_genre_sel=0) }}">Adresse</a></li>
-						</ul>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ url_for('genres_afficher', order_by='ASC', id_parent_sel=0) }}">Parents</a>
 					</li>
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="navdropdownfilms" role="button"
@@ -67,11 +58,11 @@
 						</ul>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="{{ url_for('personnes_taille_dict') }}">Démo "TAILLE"</a>
+						<a class="nav-link" href="{{ url_for('factures_afficher', order_by='ASC', id_factures_sel=0) }}">Factures</a>
 					</li>
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							Autres démos
+							Maccaud
 						</a>
 						<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
 							<li><a class="dropdown-item" href="{{ url_for('index') }}">Démo index (sans template)</a></li>

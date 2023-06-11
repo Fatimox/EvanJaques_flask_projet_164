@@ -20,8 +20,8 @@ from APP_FILMS_164.erreurs.exceptions import *
     
     But : Afficher les enfants avec les parents associés pour chaque film.
     
-    Paramètres : id_genre_sel = 0 >> tous les enfants.
-                 id_genre_sel = "n" affiche le film dont l'id est "n"
+    Paramètres : id_parent_sel = 0 >> tous les enfants.
+                 id_parent_sel = "n" affiche le film dont l'id est "n"
                  
 """
 
@@ -62,7 +62,7 @@ def films_genres_afficher(id_film_sel):
                     # Si l'utilisateur change l'id_enfants dans l'URL et qu'il ne correspond à aucun film
                     flash(f"Le film {id_film_sel} demandé n'existe pas !!", "warning")
                 else:
-                    flash(f"Données enfants et parents affichés !!", "success")
+                    flash(f"Données enfants affichés !!", "success")
 
         except Exception as Exception_films_genres_afficher:
             raise ExceptionFilmsGenresAfficher(f"fichier : {Path(__file__).name}  ;  {films_genres_afficher.__name__} ;"
