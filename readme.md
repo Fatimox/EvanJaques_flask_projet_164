@@ -8,7 +8,7 @@ Il s'agit d'une gestion de cours de yoga, afin de répertorier les enfants et le
 Soit un système CRUD (Create Read Update Delete) adapté aux besoins sur les 8 tables de ma BD : “t_parents”; “t_adresse”; "t_mail"; "t_telephone"; "t_factures"; "t_enfants"; "t_sante"; "t_cours".
 
 ## Avertissement
-Ayant eu des problèmes au niveau des boutons DELETE sur mes tables "t_parents" et "t_enfants" il est impossble de les supprimer mais cela fonctionne sur la table "t_factures". Mon projet a aussi eu quelques changements au cours de route, ne sachant pas comment faire exactement pour la gestion des cours, je me suis arreter a ce qui était fesable pour moi. 
+Ayant eu des problèmes au niveau des boutons DELETE sur mes tables "t_parents" et "t_enfants" il est impossble de les supprimer mais cela fonctionne sur la table "t_factures". J'ai aussi avec ma table "t_parents" l'impossibilité de lier des enfants, j'ai une erreur de proxy que j'ai eu trop tard pour vous demander. Mon projet a aussi eu quelques changements au cours de route, ne sachant pas comment faire exactement pour la gestion des cours, je me suis arreter a ce qui était fesable pour moi. 
 # Quels sont les prérequis pour faire fonctionner mon projet ?
 
 Un serveur MySql doit être installé

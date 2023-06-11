@@ -34,12 +34,10 @@ USE evan_jaques_info1a_164;
 
 
 -- Listage de la structure de la base pour evan_jaques_info1a_164
-DROP DATABASE IF EXISTS `evan_jaques_info1a_164`;
 CREATE DATABASE IF NOT EXISTS `evan_jaques_info1a_164` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `evan_jaques_info1a_164`;
 
 -- Listage de la structure de table evan_jaques_info1a_164. t_adresse
-DROP TABLE IF EXISTS `t_adresse`;
 CREATE TABLE IF NOT EXISTS `t_adresse` (
   `id_adresse` int NOT NULL AUTO_INCREMENT,
   `NomRue` varchar(50) DEFAULT NULL,
@@ -58,7 +56,6 @@ INSERT INTO `t_adresse` (`id_adresse`, `NomRue`, `NumeroRue`, `Ville`, `Npa`) VA
 	(5, 'Route d\'en haut', 13, 'Villeneuve', 1123);
 
 -- Listage de la structure de table evan_jaques_info1a_164. t_cours
-DROP TABLE IF EXISTS `t_cours`;
 CREATE TABLE IF NOT EXISTS `t_cours` (
   `id_cours` int NOT NULL AUTO_INCREMENT,
   `Cours1` varchar(50) DEFAULT NULL,
@@ -69,23 +66,26 @@ CREATE TABLE IF NOT EXISTS `t_cours` (
 -- Listage des données de la table evan_jaques_info1a_164.t_cours : ~0 rows (environ)
 
 -- Listage de la structure de table evan_jaques_info1a_164. t_enfants
-DROP TABLE IF EXISTS `t_enfants`;
 CREATE TABLE IF NOT EXISTS `t_enfants` (
   `id_enfants` int NOT NULL AUTO_INCREMENT,
   `Nom` varchar(50) DEFAULT NULL,
   `Prenom` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `DateNaissance` date DEFAULT NULL,
   PRIMARY KEY (`id_enfants`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table evan_jaques_info1a_164.t_enfants : ~3 rows (environ)
+-- Listage des données de la table evan_jaques_info1a_164.t_enfants : ~8 rows (environ)
 INSERT INTO `t_enfants` (`id_enfants`, `Nom`, `Prenom`, `DateNaissance`) VALUES
 	(1, 'Graf', 'Victor', '2022-12-28'),
 	(2, 'Jaques', 'Evan', '2023-05-27'),
-	(3, 'Salin', 'Max', '2022-11-17');
+	(3, 'Salin', 'Max', '2022-11-17'),
+	(4, 'Legrand', 'Joseph ', '2013-06-11'),
+	(5, 'Lepetit', 'Arthur', '2018-05-05'),
+	(6, 'Levert', 'Albert', '2016-05-11'),
+	(7, 'Henri', 'Lucien', '2017-08-27'),
+	(8, 'Chapui', 'Leo', '2019-02-15');
 
 -- Listage de la structure de table evan_jaques_info1a_164. t_enfants_cours
-DROP TABLE IF EXISTS `t_enfants_cours`;
 CREATE TABLE IF NOT EXISTS `t_enfants_cours` (
   `id_enfants_cours` int NOT NULL AUTO_INCREMENT,
   `fk_enfants` int DEFAULT NULL,
@@ -100,7 +100,6 @@ CREATE TABLE IF NOT EXISTS `t_enfants_cours` (
 -- Listage des données de la table evan_jaques_info1a_164.t_enfants_cours : ~0 rows (environ)
 
 -- Listage de la structure de table evan_jaques_info1a_164. t_enfants_sante
-DROP TABLE IF EXISTS `t_enfants_sante`;
 CREATE TABLE IF NOT EXISTS `t_enfants_sante` (
   `id_enfants_sante` int NOT NULL AUTO_INCREMENT,
   `fk_enfants` int DEFAULT NULL,
@@ -110,32 +109,34 @@ CREATE TABLE IF NOT EXISTS `t_enfants_sante` (
   KEY `FK_t_enfants_sante_t_sante` (`fk_sante`),
   CONSTRAINT `FK_t_enfants_sante_t_enfants` FOREIGN KEY (`fk_enfants`) REFERENCES `t_enfants` (`id_enfants`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_t_enfants_sante_t_sante` FOREIGN KEY (`fk_sante`) REFERENCES `t_sante` (`id_sante`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table evan_jaques_info1a_164.t_enfants_sante : ~4 rows (environ)
+-- Listage des données de la table evan_jaques_info1a_164.t_enfants_sante : ~6 rows (environ)
 INSERT INTO `t_enfants_sante` (`id_enfants_sante`, `fk_enfants`, `fk_sante`) VALUES
 	(15, 2, 2),
 	(23, 1, 1),
-	(25, 1, 3),
-	(26, 3, 1);
+	(26, 3, 1),
+	(27, 7, 2),
+	(28, 6, 3),
+	(29, 8, 1);
 
 -- Listage de la structure de table evan_jaques_info1a_164. t_factures
-DROP TABLE IF EXISTS `t_factures`;
 CREATE TABLE IF NOT EXISTS `t_factures` (
   `id_factures` int NOT NULL AUTO_INCREMENT,
   `Montant` int DEFAULT NULL,
   `Date` date DEFAULT NULL,
   PRIMARY KEY (`id_factures`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table evan_jaques_info1a_164.t_factures : ~3 rows (environ)
+-- Listage des données de la table evan_jaques_info1a_164.t_factures : ~5 rows (environ)
 INSERT INTO `t_factures` (`id_factures`, `Montant`, `Date`) VALUES
 	(1, 120, '2023-05-31'),
 	(2, 100, '2023-03-11'),
-	(3, 80, '2023-06-05');
+	(3, 80, '2023-06-05'),
+	(4, 40, '2023-06-01'),
+	(7, 70, '2023-06-16');
 
 -- Listage de la structure de table evan_jaques_info1a_164. t_mail
-DROP TABLE IF EXISTS `t_mail`;
 CREATE TABLE IF NOT EXISTS `t_mail` (
   `id_mail` int NOT NULL AUTO_INCREMENT,
   `NomMail` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
@@ -151,7 +152,6 @@ INSERT INTO `t_mail` (`id_mail`, `NomMail`) VALUES
 	(5, 'sophie.lager@outlook.com');
 
 -- Listage de la structure de table evan_jaques_info1a_164. t_parents
-DROP TABLE IF EXISTS `t_parents`;
 CREATE TABLE IF NOT EXISTS `t_parents` (
   `id_parents` int NOT NULL AUTO_INCREMENT,
   `Nom` varchar(50) DEFAULT NULL,
@@ -168,7 +168,6 @@ INSERT INTO `t_parents` (`id_parents`, `Nom`, `Prenom`) VALUES
 	(5, 'Sallin', 'Fabienne');
 
 -- Listage de la structure de table evan_jaques_info1a_164. t_parents_adresse
-DROP TABLE IF EXISTS `t_parents_adresse`;
 CREATE TABLE IF NOT EXISTS `t_parents_adresse` (
   `id_parents_adresse` int NOT NULL AUTO_INCREMENT,
   `fk_parents` int DEFAULT NULL,
@@ -189,7 +188,6 @@ INSERT INTO `t_parents_adresse` (`id_parents_adresse`, `fk_parents`, `fk_adresse
 	(5, 5, 5);
 
 -- Listage de la structure de table evan_jaques_info1a_164. t_parents_factures
-DROP TABLE IF EXISTS `t_parents_factures`;
 CREATE TABLE IF NOT EXISTS `t_parents_factures` (
   `id_parents_factures` int NOT NULL AUTO_INCREMENT,
   `fk_parents` int DEFAULT NULL,
@@ -199,16 +197,17 @@ CREATE TABLE IF NOT EXISTS `t_parents_factures` (
   KEY `FK_t_parents_factures_t_factures` (`fk_factures`),
   CONSTRAINT `FK_t_parents_factures_t_factures` FOREIGN KEY (`fk_factures`) REFERENCES `t_factures` (`id_factures`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_t_parents_factures_t_parents` FOREIGN KEY (`fk_parents`) REFERENCES `t_parents` (`id_parents`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table evan_jaques_info1a_164.t_parents_factures : ~3 rows (environ)
+-- Listage des données de la table evan_jaques_info1a_164.t_parents_factures : ~5 rows (environ)
 INSERT INTO `t_parents_factures` (`id_parents_factures`, `fk_parents`, `fk_factures`) VALUES
 	(1, 1, 2),
 	(2, 2, 3),
-	(3, 3, 1);
+	(3, 3, 1),
+	(4, 4, 1),
+	(5, 5, 7);
 
 -- Listage de la structure de table evan_jaques_info1a_164. t_parents_mail
-DROP TABLE IF EXISTS `t_parents_mail`;
 CREATE TABLE IF NOT EXISTS `t_parents_mail` (
   `id_parents_mail` int NOT NULL AUTO_INCREMENT,
   `fk_parents` int DEFAULT NULL,
@@ -228,7 +227,6 @@ INSERT INTO `t_parents_mail` (`id_parents_mail`, `fk_parents`, `fk_mail`) VALUES
 	(4, 5, 3);
 
 -- Listage de la structure de table evan_jaques_info1a_164. t_parents_telephone
-DROP TABLE IF EXISTS `t_parents_telephone`;
 CREATE TABLE IF NOT EXISTS `t_parents_telephone` (
   `id_parents_telephone` int NOT NULL AUTO_INCREMENT,
   `fk_parents` int DEFAULT NULL,
@@ -249,7 +247,6 @@ INSERT INTO `t_parents_telephone` (`id_parents_telephone`, `fk_parents`, `fk_tel
 	(5, 5, 10);
 
 -- Listage de la structure de table evan_jaques_info1a_164. t_sante
-DROP TABLE IF EXISTS `t_sante`;
 CREATE TABLE IF NOT EXISTS `t_sante` (
   `id_sante` int NOT NULL AUTO_INCREMENT,
   `Allergie` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
@@ -263,7 +260,6 @@ INSERT INTO `t_sante` (`id_sante`, `Allergie`) VALUES
 	(3, 'Accariens');
 
 -- Listage de la structure de table evan_jaques_info1a_164. t_telephone
-DROP TABLE IF EXISTS `t_telephone`;
 CREATE TABLE IF NOT EXISTS `t_telephone` (
   `id_telephone` int NOT NULL AUTO_INCREMENT,
   `NumTel` varchar(50) DEFAULT NULL,
