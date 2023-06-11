@@ -124,7 +124,8 @@ def genres_ajouter_wtf():
                 print("valeurs_insertion_dictionnaire ", valeurs_insertion_dictionnaire)
 
                 strsql_insert_genre = """INSERT INTO t_parents (id_parents,Nom,Prenom) VALUES (NULL,%(value_intitule_genre)s,%(value_intitule_parents)s)"""
-                strsql_insert_telephone = """INSERT INTO t_telephone (id_telephone,NumTel) VALUES (NULL,%(value_intitule_telephone)s)"""
+                strsql_insert_telephone = """INSERT INTO t_parents_telephone (id_parents_telephone, fk_parents, fk_telephone)
+                                                    VALUES (NULL, %(value_intitule_parents)s, %(value_intitule_telephone)s)"""
                 with DBconnection() as mconn_bd:
                     mconn_bd.execute(strsql_insert_genre, valeurs_insertion_dictionnaire)
                     mconn_bd.execute(strsql_insert_telephone, valeurs_insertion_dictionnaire)

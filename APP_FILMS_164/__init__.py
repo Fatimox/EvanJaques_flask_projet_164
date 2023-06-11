@@ -41,7 +41,6 @@ try:
     from APP_FILMS_164.database import database_tools
     from APP_FILMS_164.essais_wtf_forms import gestion_essai_wtf
     from APP_FILMS_164.essais_wtf_forms import gestion_wtf_forms_demo_select
-    from APP_FILMS_164.parents import gestion_parents_crud
     from APP_FILMS_164.demos_om_164 import routes_demos
 
     from APP_FILMS_164.enfants_sante import gestion_enfants_sante_crud
@@ -49,6 +48,9 @@ try:
 
     from APP_FILMS_164.enfants import gestion_enfants_crud
     from APP_FILMS_164.enfants import gestion_enfants_wtf_forms
+
+    from APP_FILMS_164.parents import gestion_parents_crud
+    from APP_FILMS_164.parents import gestion_parents_wtf_forms
 
 except Exception as Exception_init_app_films_164:
     print(f"4567756434 Une erreur est survenue {type(Exception_init_app_films_164)} dans"
